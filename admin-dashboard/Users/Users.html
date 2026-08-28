@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Users | Library Online</title>
+    <link rel="stylesheet" href="../admin-pages.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div class="page-title">
+          <h1>Users</h1>
+          <p>Create, read, update, and delete application users.</p>
+        </div>
+        <div class="header-actions">
+          <button
+            class="button button--primary"
+            id="createButton"
+            type="button"
+          >
+            + Add User
+          </button>
+        </div>
+      </header>
+      <section class="card toolbar">
+        <div class="search-box">
+          <input
+            class="input"
+            id="searchInput"
+            type="search"
+            placeholder="Search by email..."
+          />
+        </div>
+      </section>
+      <section class="card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="emptyState">No users loaded.</div>
+        <footer class="pagination">
+          <span id="itemsCount">0 items</span>
+          <div class="pagination-actions">
+            <button class="button button--small" type="button">Previous</button
+            ><button class="button button--small" type="button">Next</button>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

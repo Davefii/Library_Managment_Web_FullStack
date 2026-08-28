@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Category Form | Library Online</title>
+    <link rel="stylesheet" href="../admin-pages.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="card form-card">
+        <header class="page-title">
+          <h1>Category</h1>
+          <p>Create or edit category.</p>
+        </header>
+        <form class="form-grid" id="categoryForm">
+          <div class="form-group">
+            <label for="name">Name</label
+            ><input class="input" id="name" type="text" />
+          </div>
+          <div class="form-group">
+            <label for="parentId">Parent category</label
+            ><select class="select" id="parentId"></select>
+          </div>
+          <div class="form-group form-group--full">
+            <label for="description">Description</label
+            ><textarea class="textarea" id="description" rows="5"></textarea>
+          </div>
+          <div class="form-actions form-group--full">
+            <button class="button" type="button">Cancel</button
+            ><button class="button button--primary" type="submit">
+              Save Category
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

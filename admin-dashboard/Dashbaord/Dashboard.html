@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="../style.css">
+<body>
+    <main class="admin-main">
+        <header class="admin-header">
+          <div>
+            <p class="section-label">Library administration</p>
+            <h1>Dashboard</h1>
+            <p>Operational overview of your library.</p>
+          </div>
+          <a href="../BooksList/BookForm.html" class="button button--primary" type="button">
+            Add new book
+          </a>
+        </header>
+        <section class="metric-grid" aria-label="Library statistics">
+          <article class="metric-card card">
+            <span>Total books</span><strong id="totalBooks">0</strong
+            ><small>cataloged titles</small>
+          </article>
+          <article class="metric-card card">
+            <span>Total authors</span><strong id="totalAuthors">0</strong
+            ><small>represented authors</small>
+          </article>
+          <article class="metric-card card">
+            <span>Total categories</span><strong id="totalCategories">0</strong
+            ><small>active categories</small>
+          </article>
+          <article class="metric-card card">
+            <span>Total members</span><strong id="totalMembers">0</strong
+            ><small>registered members</small>
+          </article>
+          <article class="metric-card card">
+            <span>Active borrowings</span
+            ><strong id="activeBorrowings">0</strong
+            ><small>currently borrowed</small>
+          </article>
+          <article class="metric-card card">
+            <span>Overdue borrowings</span
+            ><strong id="overdueBorrowings">0</strong
+            ><small>needs attention</small>
+          </article>
+        </section>
+        <section class="admin-grid">
+          <article class="card popular-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Popular books</h2>
+                <p>Most borrowed this month</p>
+              </div>
+              <a href="#">View all</a>
+            </div>
+            <ul class="popular-list" id="popular-list">
+            </ul>
+          </article>
+          <article class="card category-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Books by category</h2>
+                <p>Collection distribution</p>
+              </div>
+            </div>
+            <div id="category-list"></div>
+          </article>
+          <article class="card recent-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Recent borrowings</h2>
+                <p>Latest circulation activity</p>
+              </div>
+              <a href="#">View all</a>
+            </div>
+            <table class="data-table" id="data-table">
+              <thead>
+                <tr>
+                  <th>Member</th>
+                  <th>Book</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="recent-borrowings-body"></tbody>
+            </table>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="ScriptDashboard.js"></script>
+</body>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Books | Library Online</title>
+    <link rel="stylesheet" href="../admin-pages.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div class="page-title">
+          <h1>Books</h1>
+          <p>Create, read, update, and delete books.</p>
+        </div>
+          <button class="button button--primary" id="createBook">+ Add Book</button>
+        </div>
+      </header>
+      <section class="card toolbar">
+        <div class="search-box">
+          <input
+            class="input"
+            id="searchInput"
+            type="search"
+            placeholder="Search by title or ISBN..."
+          />
+          <select name="BW" id="ByWhat" class="input">
+              <option value="title">Title</option>
+              <option value="isbn">ISBN</option>
+          </select>
+        </div>
+      </section>
+      <section class="card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>ISBN</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Copies</th>
+                <th>PublishDate</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="booksTableBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="emptyState">No books loaded.</div>
+        <footer class="pagination">
+          <span id="itemsCount">0 items</span>
+          <!--<div class="pagination-actions">
+            <button class="button button--small" type="button">Previous</button>
+            <button class="button button--small" type="button">Next</button>
+          </div>-->
+        </footer>
+      </section>
+    </main>
+    <script type="module" src="Script.js"></script>
+  </body>
+</html>

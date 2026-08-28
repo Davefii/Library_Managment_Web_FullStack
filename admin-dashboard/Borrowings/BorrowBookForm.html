@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../admin-pages.css" />
+    <title>BorrowBook | Library Online</title>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="card form-card">
+        <header class="page-title">
+          <h1>Borrowing</h1>
+          <p id="formTitle">Assign a book to a member.</p>
+        </header>
+        <form class="form-grid" id="borrowingForm">
+          <!-- Book Selection -->
+          <div class="form-group">
+            <label for="bookId">Book</label>
+            <select class="select" id="bookId" required>
+              <option value="">-- Select a book --</option>
+            </select>
+          </div>
+          <!-- Member Selection -->
+          <div class="form-group">
+            <label for="memberId">Member</label>
+            <select class="select" id="memberId" required>
+              <option value="">-- Select a member --</option>
+            </select>
+          </div>
+          <!-- Due Date Selection -->
+          <div class="form-group">
+            <label for="dueDate">Due Date</label>
+            <input class="input" id="dueDate" type="date" required />
+          </div>
+          <!-- Form Actions (Full Width Row) -->
+          <div class="form-actions form-group--full">
+            <button class="button" type="button" id="btnClose">Cancel</button>
+            <button class="button button--primary" id="btnSave" type="submit">
+              Create Borrowing
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="ScriptAddOrUpdateBorrowings.js"></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Audit Logs | Library Online</title>
+    <link rel="stylesheet" href="../admin-pages.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div class="page-title">
+          <h1>Audit Logs</h1>
+          <p>Read-only security and activity history.</p>
+        </div>
+        <div class="header-actions"></div>
+      </header>
+      <section class="card toolbar">
+        <div class="search-box">
+          <input
+            class="input"
+            id="searchInput"
+            type="search"
+            placeholder="Search audit events..."
+          />
+        </div>
+      </section>
+      <section class="card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>User</th>
+                <th>Action</th>
+                <th>Entity</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="auditLogsTableBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="emptyState">No audit logs loaded.</div>
+        <footer class="pagination">
+          <span id="itemsCount">0 items</span>
+          <div class="pagination-actions">
+            <button class="button button--small" type="button">Previous</button
+            ><button class="button button--small" type="button">Next</button>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

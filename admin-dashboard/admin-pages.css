@@ -1,0 +1,253 @@
+:root {
+  --color-canvas: #f8f7f2;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f1f0e9;
+  --color-surface-muted: #e7e5dc;
+  --color-text: #252821;
+  --color-text-muted: #74786b;
+  --color-primary: #5f6b2d;
+  --color-primary-dark: #485221;
+  --color-primary-soft: #e9edd9;
+  --color-accent: #b28a45;
+  --color-danger: #a65045;
+  --color-success: #45714a;
+  --color-border: #dddcd2;
+  --shadow-soft: 0 10px 30px rgba(48, 52, 35, .06);
+  --shadow-card: 0 4px 18px rgba(48, 52, 35, .05);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --content-width: 1240px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text)
+}
+
+body {
+    padding: 28px
+}
+
+.page-shell {
+    max-width: 1400px;
+    margin: auto
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px
+}
+
+.page-title h1 {
+    margin: 0 0 6px;
+    font-size: 28px
+}
+
+.page-title p {
+    margin: 0;
+    color: var(--muted)
+}
+
+.header-actions,
+.toolbar-actions,
+.actions,
+.pagination-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.button {
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    border-radius: 9px;
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer
+}
+
+.button--primary {
+    background: var(--color-primary);
+    border-color: var(--primary);
+    color: #fff
+}
+
+.button--danger {
+    color: var(--danger);
+    border-color: #fecaca
+}
+
+.button--small {
+    padding: 7px 10px;
+    font-size: 13px
+}
+
+.card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow)
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap
+}
+
+.search-box {
+    min-width: 260px;
+    flex: 1
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+    padding: 10px 12px;
+    font: inherit;
+    background: #fff;
+    color: var(--text)
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    outline: 2px solid rgba(37, 99, 235, .15);
+    border-color: var(--primary)
+}
+
+.table-wrapper {
+    overflow-x: auto
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse
+}
+
+.data-table th,
+.data-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap
+}
+
+.data-table th {
+    background: #f8fafc;
+    color: #475467;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .03em
+}
+
+.data-table tbody tr:hover {
+    background: #fafcff
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 5px 9px;
+    font-size: 12px;
+    font-weight: 700
+}
+
+.badge--success {
+    background: #dcfce7;
+    color: var(--success)
+}
+
+.badge--warning {
+    background: #fef3c7;
+    color: var(--warning)
+}
+
+.badge--danger {
+    background: #fee2e2;
+    color: var(--danger)
+}
+
+.badge--neutral {
+    background: #eef2f6;
+    color: #475467
+}
+
+.empty-state {
+    padding: 48px 20px;
+    text-align: center;
+    color: var(--muted)
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    color: var(--muted)
+}
+
+.form-card {
+    padding: 24px
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px
+}
+
+.form-group--full {
+    grid-column: 1/-1
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px
+}
+
+@media(max-width:800px) {
+    body {
+        padding: 16px
+    }
+
+    .page-header {
+        flex-direction: column
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr
+    }
+
+    .form-group--full {
+        grid-column: auto
+    }
+}

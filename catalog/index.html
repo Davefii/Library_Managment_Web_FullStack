@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Browse Catalog</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <main>
+      <section class="catalog-hero">
+        <div class="container">
+          <p class="section-label">Library catalog</p>
+          <h1 class="page-title">Browse the collection.</h1>
+          <p class="page-subtitle">
+            Search the catalog and filter by category or availability.
+          </p>
+        </div>
+      </section>
+      <section class="container catalog-layout">
+        <aside class="filter-panel card" aria-label="Catalog filters">
+          <div class="filter-panel__header">
+            <h2>Filters</h2>
+            <button class="text-button" type="button">Reset</button>
+          </div>
+          <fieldset>
+            <legend>Category</legend>
+            <label><input type="checkbox" /> Programming</label
+            ><label><input type="checkbox" /> Architecture</label
+            ><label><input type="checkbox" /> Design</label
+            ><label><input type="checkbox" /> History</label>
+          </fieldset>
+          <fieldset>
+            <legend>Availability</legend>
+            <label
+              ><input type="radio" name="availability" checked /> All
+              books</label
+            ><label
+              ><input type="radio" name="availability" /> Available now</label
+            >
+          </fieldset>
+        </aside>
+        <section class="catalog-results" aria-labelledby="catalog-heading">
+          <header class="results-toolbar">
+            <div>
+              <h2 id="catalog-heading">Available titles</h2>
+              <p>12 results</p>
+            </div>
+            <div class="toolbar-actions">
+              <div class="search-field">
+                <span class="search-field__icon">⌕</span
+                ><input type="search" placeholder="Search books" />
+              </div>
+              <select aria-label="Sort books">
+                <option>Recently added</option>
+                <option>Title A–Z</option>
+                <option>Most borrowed</option>
+              </select>
+            </div>
+          </header>
+          <div class="catalog-grid">
+            <article class="book-card card">
+              <div class="book-card__cover book-cover--olive">CC</div>
+              <div class="book-card__body">
+                <span class="badge badge--success">Available</span>
+                <h3>Clean Code</h3>
+                <p>Robert C. Martin</p>
+                <div class="book-card__actions">
+                  <a
+                    class="button button--primary button--small"
+                    href="../book-details/index.html?id=1"
+                    >Details</a
+                  ><button
+                    class="button button--secondary button--small"
+                    type="button"
+                  >
+                    Borrow
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="book-card card">
+              <div class="book-card__cover book-cover--sand">DP</div>
+              <div class="book-card__body">
+                <span class="badge badge--success">Available</span>
+                <h3>Design Patterns</h3>
+                <p>Erich Gamma</p>
+                <div class="book-card__actions">
+                  <a
+                    class="button button--primary button--small"
+                    href="../book-details/index.html?id=2"
+                    >Details</a
+                  ><button
+                    class="button button--secondary button--small"
+                    type="button"
+                  >
+                    Borrow
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="book-card card">
+              <div class="book-card__cover book-cover--slate">C#</div>
+              <div class="book-card__body">
+                <span class="badge badge--warning">On loan</span>
+                <h3>C# in Depth</h3>
+                <p>Jon Skeet</p>
+                <div class="book-card__actions">
+                  <a
+                    class="button button--primary button--small"
+                    href="../book-details/index.html?id=3"
+                    >Details</a
+                  ><button
+                    class="button button--secondary button--small"
+                    type="button"
+                  >
+                    Reserve
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="book-card card">
+              <div class="book-card__cover book-cover--clay">PG</div>
+              <div class="book-card__body">
+                <span class="badge badge--success">Available</span>
+                <h3>The Pragmatic Programmer</h3>
+                <p>David Thomas</p>
+                <div class="book-card__actions">
+                  <a
+                    class="button button--primary button--small"
+                    href="../book-details/index.html?id=4"
+                    >Details</a
+                  ><button
+                    class="button button--secondary button--small"
+                    type="button"
+                  >
+                    Borrow
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/layout.js"></script>
+  </body>
+</html>

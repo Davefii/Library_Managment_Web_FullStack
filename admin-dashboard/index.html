@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <a class="brand" href="../home/index.html">Library Online</a>
+        <span class="sidebar-caption">Administration</span>
+        <nav class="admin-nav" aria-label="Administration navigation">
+          <a aria-current="page" data-page="Dashbaord/Dashboard.html" href="Dashbaord/Dashboard.html">Dashboard</a>
+          <a href="#" data-page="BooksList/Books.html">Books</a>
+          <a href="#" data-page="Authors/Authors.html">Authors</a>
+          <a href="#" data-page="Category/Categories.html">Categories</a>
+          <a href="#" data-page="Members/Members.html">Members</a>
+          <a href="#" data-page="Borrowings/Borrowings.html">Borrowings</a>
+          <a href="#" data-page="Users/Users.html">Users</a>
+          <a href="#" data-page="UserProfile/UserProfile.html">Users Profile</a>
+          <a href="#" data-page="AuditLogs/AuditLogs.html">Audit logs</a>
+        </nav>
+        <div class="sidebar-footer">
+          <a href="#">Settings</a>
+          <a href="#">Sign out</a>
+        </div>
+      </aside>
+      <main class="admin-main">
+        <iframe id="adminFrame" src="Dashbaord/Dashboard.html" frameborder="0" width="100%" height="100%"></iframe>
+      </main>
+    </div>
+    <script src="admin-Navigator.js"></script>
+  </body>
+</html>

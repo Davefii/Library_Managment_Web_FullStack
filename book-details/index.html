@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Details</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <main class="container book-detail-page">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../home/index.html">Home</a><span>/</span
+        ><a href="../catalog/index.html">Catalog</a><span>/</span
+        ><span aria-current="page">Clean Code</span>
+      </nav>
+      <article class="book-detail card">
+        <div
+          class="book-detail__cover book-cover--olive"
+          aria-label="Book cover placeholder"
+        >
+          CC
+        </div>
+        <div class="book-detail__content">
+          <div class="book-meta">
+            <span class="badge badge--success">Available now</span
+            ><span class="book-meta__category">Programming</span>
+          </div>
+          <h1 class="page-title">Clean Code</h1>
+          <p class="book-detail__author">Robert C. Martin</p>
+          <p class="book-detail__description">
+            A practical guide to writing clean, maintainable software with clear
+            names, focused functions, and disciplined engineering practices.
+          </p>
+          <dl class="book-facts">
+            <div>
+              <dt>ISBN</dt>
+              <dd>9780132350884</dd>
+            </div>
+            <div>
+              <dt>Published</dt>
+              <dd>2008</dd>
+            </div>
+            <div>
+              <dt>Total copies</dt>
+              <dd>8</dd>
+            </div>
+            <div>
+              <dt>Available</dt>
+              <dd>5</dd>
+            </div>
+          </dl>
+          <div class="book-detail__actions">
+            <button class="button button--primary" type="button">
+              Borrow book</button
+            ><button class="button button--secondary" type="button">
+              Add to reading list
+            </button>
+          </div>
+        </div>
+      </article>
+      <section class="related-section">
+        <header class="section-heading">
+          <div>
+            <p class="section-label">Keep exploring</p>
+            <h2>Related titles</h2>
+          </div>
+        </header>
+        <div class="related-grid">
+          <article class="related-card card">
+            <div class="book-cover book-cover--sand">DP</div>
+            <h3>Design Patterns</h3>
+            <p>Erich Gamma</p>
+          </article>
+          <article class="related-card card">
+            <div class="book-cover book-cover--slate">C#</div>
+            <h3>C# in Depth</h3>
+            <p>Jon Skeet</p>
+          </article>
+          <article class="related-card card">
+            <div class="book-cover book-cover--clay">PG</div>
+            <h3>The Pragmatic Programmer</h3>
+            <p>David Thomas</p>
+          </article>
+        </div>
+      </section>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/layout.js"></script>
+  </body>
+</html>

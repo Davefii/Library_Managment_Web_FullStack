@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Members | Library Online</title>
+    <link rel="stylesheet" href="../admin-pages.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div class="page-title">
+          <h1>Members</h1>
+          <p>Create, read, update, and delete library members.</p>
+        </div>
+        <div class="header-actions">
+          <button
+            class="button button--primary"
+            id="createButton"
+            type="button"
+          >
+            + Add Member
+          </button>
+        </div>
+      </header>
+      <section class="card toolbar">
+        <div class="search-box">
+          <input
+            class="input"
+            id="searchInput"
+            type="search"
+            placeholder="Search members..."
+          />
+        </div>
+      </section>
+      <section class="card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="membersTableBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="emptyState">No members loaded.</div>
+        <footer class="pagination">
+          <span id="itemsCount">0 items</span>
+          <div class="pagination-actions">
+            <button class="button button--small" type="button">Previous</button
+            ><button class="button button--small" type="button">Next</button>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
