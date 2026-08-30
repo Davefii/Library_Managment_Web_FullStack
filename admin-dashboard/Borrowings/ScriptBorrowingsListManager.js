@@ -1,11 +1,24 @@
 // BorrowingsList.js (or your page's main script)
 import * as BorrowingService from "../../API_service_layer/Borrowings.js";
 
-/**
- * Renders the borrowing records into the table.
- * Expects a <tbody id="borrowingsTableBody"> in the DOM.
- */
-const TotalBorrowings = document.getElementById("itemsCount");
+const btnBorrowbook = document.getElementById("createBorrowingButton");
+
+function OpenAddBorrow() {
+    const url = new URL(`BorrowBookForm.html`, document.baseURI);
+    window.open(url.href,  "_blank",
+        "width=900,height=500,resizable=no,scrollbars=yes"
+    );
+}
+function OpenUpdateBorrow(borrowId) {
+        const url = new URL(
+        `BorrowBookForm.html?id=${borrowId}`,
+        document.baseURI
+    );
+    window.open(url.href,  "_blank",
+        "width=900,height=500,resizable=no,scrollbars=yes"
+    );
+}
+btnBorrowbook.addEventListener("click", OpenAddBorrow);
 export async function loadBorrowings() {
     const tbody = document.getElementById('borrowingsTableBody');
     if (!tbody) {
@@ -64,15 +77,16 @@ export async function loadBorrowings() {
             }
 
             // --- Action Buttons ---
+            // 1. Update Button (always visible, links to edit form)
+            const updateButton = `<button href="#" class="button button--small" data-action="update" data-id="${borrowing.id}">Update</button>`;
+
             // "Return" button appears only if NOT returned.
-            const returnButton = !borrowing.isReturned 
-                ? `<button class="button button--small button--primary" data-action="return" data-id="${borrowing.id}">Return</button>`
-                : `<span class="badge badge--neutral">Completed</span>`;
+            const returnButton = `<button class="button button--small button--primary" data-action="return" data-id="${borrowing.id}">Return</button>`;
 
             // "Delete" button always appears.
             const deleteButton = `<button class="button button--small button--danger" data-action="delete" data-id="${borrowing.id}">Delete</button>`;
 
-            const actionsHtml = `${returnButton} ${deleteButton}`;
+            const actionsHtml = !borrowing.isReturned ? `${returnButton} ${updateButton} ${deleteButton}` : `<span class="badge badge--neutral">Completed</span>`;
 
             return `
                 <tr data-id="${borrowing.id}">
@@ -94,6 +108,7 @@ export async function loadBorrowings() {
 
         // --- 6. Attach event listeners to the action buttons ---
         attachActionHandlers(tbody);
+
 
     } catch (error) {
         console.error('Failed to load borrowings:', error);
@@ -162,6 +177,14 @@ function attachActionHandlers(tbody) {
                 alert(`Error deleting borrowing: ${error.message}`);
             }
         }
+        if (action === 'update') {
+            try {
+                OpenUpdateBorrow(id);
+            } catch (error) {
+                alert(`Error Updating borrowing: ${error.message}`);
+            }
+        }
     });
 }
+
 document.addEventListener("DOMContentLoaded", loadBorrowings());

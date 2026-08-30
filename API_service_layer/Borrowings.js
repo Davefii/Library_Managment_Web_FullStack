@@ -41,7 +41,7 @@ export async function getBorrowings() {
 export async function getBorrowingById(id) {
 
     const response = await fetch(
-        `${API_URL}GetBorrowingBy${id}`,
+        `${API_URL}GetBorrowingBy/${id}`,
         {
             method: "GET",
             credentials: "include"
@@ -66,10 +66,9 @@ export async function addBorrowing(borrowing) {
             },
 
             body: JSON.stringify({
-                memberId: borrowing.memberId,
-                bookId: borrowing.bookId,
-                borrowDate: borrowing.borrowDate,
-                dueDate: borrowing.dueDate
+                MemberId: borrowing.MemberId,   
+                BookId: borrowing.BookId,        
+                BorrowDate: borrowing.borrowDate 
             })
         }
     );
@@ -82,7 +81,7 @@ export async function addBorrowing(borrowing) {
 export async function updateBorrowing(id, borrowing) {
 
     const response = await fetch(
-        `${API_URL}UpdateBorrowing${id}`,
+        `${API_URL}UpdateBorrowing/${id}`,
         {
             method: "PUT",
             credentials: "include",
@@ -92,9 +91,8 @@ export async function updateBorrowing(id, borrowing) {
             },
 
             body: JSON.stringify({
-                returnDate: borrowing.returnDate,
-                dueDate: borrowing.dueDate,
-                isReturned: borrowing.isReturned
+                MemberId: borrowing.MemberId,
+                BookId: borrowing.BookId 
             })
         }
     );
