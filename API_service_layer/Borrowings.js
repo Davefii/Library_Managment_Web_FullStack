@@ -1,4 +1,4 @@
-const API_URL = "https://localhost:7010/";
+const API_URL = "https://localhost:7010/api/Borrowings/";
 
 async function handleResponse(response) {
 
@@ -55,21 +55,22 @@ export async function getBorrowingById(id) {
 // ADD BORROWING
 export async function addBorrowing(borrowing) {
 
+    const payload = {
+        memberId: Number(borrowing.MemberId ?? borrowing.memberId),
+        bookId: Number(borrowing.BookId ?? borrowing.bookId),
+        borrowDate: borrowing.BorrowDate ?? borrowing.borrowDate ?? new Date().toISOString()
+    };
+
     const response = await fetch(
         `${API_URL}AddBorrowing`,
         {
             method: "POST",
             credentials: "include",
-
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
-
-            body: JSON.stringify({
-                MemberId: borrowing.MemberId,   
-                BookId: borrowing.BookId,        
-                BorrowDate: borrowing.borrowDate 
-            })
+            body: JSON.stringify(payload)
         }
     );
 
@@ -80,20 +81,22 @@ export async function addBorrowing(borrowing) {
 // UPDATE BORROWING
 export async function updateBorrowing(id, borrowing) {
 
+    const payload = {
+        memberId: Number(borrowing.MemberId ?? borrowing.memberId),
+        bookId: Number(borrowing.BookId ?? borrowing.bookId),
+        borrowDate: borrowing.BorrowDate ?? borrowing.borrowDate ?? new Date().toISOString()
+    };
+
     const response = await fetch(
         `${API_URL}UpdateBorrowing/${id}`,
         {
             method: "PUT",
             credentials: "include",
-
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
-
-            body: JSON.stringify({
-                MemberId: borrowing.MemberId,
-                BookId: borrowing.BookId 
-            })
+            body: JSON.stringify(payload)
         }
     );
 

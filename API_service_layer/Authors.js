@@ -92,6 +92,7 @@ export async function addAuthor(author) {
         {
             method: "POST",
             credentials: "include",
+            
             body: formData
         }
     );

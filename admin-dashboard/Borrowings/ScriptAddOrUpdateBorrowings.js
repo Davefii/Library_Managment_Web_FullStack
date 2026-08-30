@@ -147,7 +147,7 @@ async function addBorrowing(data) {
         
         // Switch to Update Mode with the new ID
         currentMode = MODE.UPDATE;
-        currentBorrowingId = result.id; // Assuming the API returns { id: ... }
+        /*currentBorrowingId = result.id; // Assuming the API returns { id: ... }
         formTitle.textContent = 'Edit borrowing record.';
         btnSave.textContent = 'Update Borrowing';
         
@@ -156,8 +156,8 @@ async function addBorrowing(data) {
         
         // Update URL without reloading (optional: for bookmarking)
         const newUrl = `${window.location.pathname}?id=${currentBorrowingId}`;
-        window.history.pushState({}, '', newUrl);
-        
+        window.history.pushState({}, '', newUrl);*/
+        window.close();
         return result;
 
     } catch (error) {
@@ -209,10 +209,8 @@ async function handleSave(event) {
     try {
         if (currentMode === MODE.ADD) {
             await addBorrowing(data);
-            alert("Added Borrow Successfully");
         } else {
             await updateBorrowing(data);
-            alert("Updated Borrow Successfully");
         }
     } catch (error) {
         console.error(error);
