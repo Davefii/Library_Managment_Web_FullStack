@@ -11,16 +11,16 @@
       <header class="page-header">
         <div class="page-title">
           <h1>Members</h1>
-          <p>Create, read, update, and delete library members.</p>
+          <p>List members.</p>
         </div>
         <div class="header-actions">
-          <button
+          <!--<button
             class="button button--primary"
             id="createButton"
             type="button"
           >
             + Add Member
-          </button>
+          </button>-->
         </div>
       </header>
       <section class="card toolbar">
@@ -38,26 +38,27 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th>Member</th>
+                <th>Member Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Address</th>
                 <th>Status</th>
-                <th>Joined</th>
+                <th>Membership Expiry Date</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody id="membersTableBody"></tbody>
           </table>
         </div>
-        <div class="empty-state" id="emptyState">No members loaded.</div>
-        <footer class="pagination">
+        <!--<footer class="pagination">
           <span id="itemsCount">0 items</span>
           <div class="pagination-actions">
             <button class="button button--small" type="button">Previous</button
             ><button class="button button--small" type="button">Next</button>
           </div>
-        </footer>
+        </footer>-->
       </section>
     </main>
+    <script type="module" src="ScriptLoadMembers.js"></script>
   </body>
 </html>

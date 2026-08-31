@@ -26,7 +26,7 @@ async function handleResponse(response) {
 export async function getMembers() {
 
     const response = await fetch(
-        `${API_URL}ListMemebers`,
+        `${API_URL}ListMembers`,
         {
             method: "GET",
             credentials: "include"
@@ -51,6 +51,19 @@ export async function getMe() {
     return await handleResponse(response);
 }
 
+// GET MEMBER By ID
+export async function getMemberByID(ID) {
+
+    const response = await fetch(
+        `${API_URL}GetMemberBy${ID}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
 
 // ADD MEMBER
 export async function addMember(member) {
@@ -66,10 +79,10 @@ export async function addMember(member) {
             },
 
             body: JSON.stringify({
-                name: member.name,
-                phone: member.phone,
-                address: member.address,
-                membershipExpiryDate: member.membershipExpiryDate
+                Name: member.name,
+                Phone: member.phone,
+                Address: member.address,
+                MembershipExpiryDate: member.membershipExpiryDate
             })
         }
     );
@@ -82,7 +95,7 @@ export async function addMember(member) {
 export async function updateMyInformation(member) {
 
     const response = await fetch(
-        `${API_URL}UpdateMyInfomationMember`,
+        `${API_URL}UpdateMyInformationMember`,
         {
             method: "PUT",
             credentials: "include",
@@ -92,10 +105,9 @@ export async function updateMyInformation(member) {
             },
 
             body: JSON.stringify({
-                name: member.name,
-                phone: member.phone,
-                address: member.address,
-                membershipExpiryDate: member.membershipExpiryDate
+                Name: member.name,
+                Phone: member.phone,
+                Address: member.address
             })
         }
     );
@@ -108,7 +120,7 @@ export async function updateMyInformation(member) {
 export async function deleteMember(id) {
 
     const response = await fetch(
-        `${API_URL}DeleteMemeberBy${id}`,
+        `${API_URL}DeleteMemberBy${id}`,
         {
             method: "DELETE",
             credentials: "include"

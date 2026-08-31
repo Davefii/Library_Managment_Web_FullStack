@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Member Form | Library Online</title>
+    <link rel="stylesheet" href="../admin-pages.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="card form-card" aria-labelledby="member-form-title">
+        <header class="page-title">
+          <h1 id="member-form-title">Member</h1>
+          <p>Create a new member profile.</p>
+        </header>
+
+        <form id="member-registration-form" class="form-grid" action="#" method="post">
+          <div class="form-group">
+            <label for="member-full-name">Name</label>
+            <input class="input" id="member-full-name" name="fullName" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="member-phone-number">Phone number</label>
+            <input class="input" id="member-phone-number" name="phoneNumber" type="tel" autocomplete="tel" required />
+          </div>
+
+          <div class="form-group form-group--full">
+            <label for="member-address">Address</label>
+            <textarea class="textarea" id="member-address" name="address" rows="4" autocomplete="street-address" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="membership-expiry-date">Membership expiry date</label>
+            <input class="input" id="membership-expiry-date" name="membershipExpiryDate" type="date" required />
+          </div>
+
+          <div class="form-actions form-group--full">
+            <a class="button" href="Members.html">Cancel</a>
+            <button class="button button--primary" id="save-member-button" type="submit">Save Member</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
