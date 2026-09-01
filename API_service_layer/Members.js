@@ -115,6 +115,29 @@ export async function updateMyInformation(member) {
     return await handleResponse(response);
 }
 
+export async function updateMember(id,member) {
+
+    const response = await fetch(
+        `${API_URL}UpdateMember${id}`,
+        {
+            method: "PUT",
+            credentials: "include",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                Name: member.name,
+                Phone: member.phone,
+                Address: member.address,
+                MembershipExpiryDate: member.membershipExpiryDate
+            })
+        }
+    );
+
+    return await handleResponse(response);
+}
 
 // DELETE MEMBER
 export async function deleteMember(id) {

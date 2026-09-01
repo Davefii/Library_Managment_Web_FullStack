@@ -45,9 +45,20 @@ const MEMBER_COLUMNS = [
   },
 ];
 
+function openMemberForm(memberId) {
+  const formUrl = memberId
+    ? `MemberFrom.html?id=${encodeURIComponent(memberId)}`
+    : "MemberFrom.html";
+  const popup = window.open(
+    new URL(formUrl, document.baseURI).href,
+    "memberForm",
+    "width=495,height=660,resizable=no,scrollbars=yes",
+  );
+  popup?.focus();
+}
+
 function handleUpdateMember({ id }) {
-  // Member update navigation will be added later.
-  console.log(`Update member ${id}`);
+  openMemberForm(id);
 }
 
 async function handleDeleteMember({ id, button }) {
@@ -98,4 +109,15 @@ export async function LoadMembers() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", LoadMembers);
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("create-member-button")?.addEventListener("click", () => {
+    openMemberForm();
+  });
+
+  window.addEventListener("message", (event) => {
+    if (event.origin !== window.location.origin || event.data?.type !== "member-saved") return;
+    LoadMembers();
+  });
+
+  LoadMembers();
+});
