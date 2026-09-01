@@ -1,82 +1,138 @@
 import * as Books from "../../API_service_layer/Books.js";
-const Book = await Books.BooksList();
-const tbody = document.getElementById("booksTableBody");
-const createBook = document.getElementById("createBook");
-function LoadBooks() {
-    tbody.replaceChildren();
+import {
+  attachTableActionHandler,
+  renderTableRows,
+  showTableMessage,
+} from "../SharedModules/TableRenderer.js";
 
-    Book.forEach(book => {
-        const row = document.createElement("tr");
-        const isAvailable = book.isAvailable ?? book.IsAvailable;
-        const authorNames = (book.authors ?? [])
-            .map(author => `${author.firstName} ${author.lastName}`)
-            .join(", ");
-        const categoryNames = (book.categories ?? [])
-            .map(category => category.name)
-            .join(", ");
+function getAuthorNames(book) {
+  const authors = book.authors ?? book.Authors ?? [];
+  const names = authors
+    .map((author) => `${author.firstName ?? author.FirstName ?? ""} ${author.lastName ?? author.LastName ?? ""}`.trim())
+    .filter(Boolean);
 
-        row.innerHTML = `
-            <td>${book.id ?? book.ID ?? ""}</td>
-            <td><img style="width: 40px; height: 56px; object-fit: cover;" src="https://localhost:7010/${book.coverImage ?? book.CoverImage ?? ""}" alt="Book cover" /></td>
-            <td>${book.title ?? book.Title ?? ""}</td>
-            <td>${book.isbn ?? book.ISBN ?? ""}</td>
-            <td>${authorNames || book.authorName || book.AuthorName || ""}</td>
-            <td>${categoryNames || book.categoryName || book.CategoryName || ""}</td>
-            <td>${book.copiesCount ?? book.TotalCopies ?? ""}</td>
-            <td>${book.publishYear ?? ""}</td>
-            <td><span class="badge ${isAvailable ? "badge--success" : "badge--danger"}">${isAvailable ? "Available" : "Unavailable"}</span></td>
-            <td class="actions">
-                <a href="#" data-action="update" data-bookid="${book.id ?? book.ID ?? ""}">Update</a>
-                <a href="#" data-action="delete" data-bookid="${book.id ?? book.ID ?? ""}">Delete</a>
-            </td>
-        `;
-
-        tbody.appendChild(row);
-    });
+  return names.join(", ") || book.authorName || book.AuthorName || "-";
 }
+
+function getCategoryNames(book) {
+  const categories = book.categories ?? book.Categories ?? [];
+  const names = categories
+    .map((category) => category.name ?? category.Name)
+    .filter(Boolean);
+
+  return names.join(", ") || book.categoryName || book.CategoryName || "-";
+}
+
+function createBookCover(book) {
+  const imagePath = book.coverImage ?? book.CoverImage;
+  if (!imagePath) return "-";
+
+  const image = document.createElement("img");
+  image.src = `https://localhost:7010/${imagePath}`;
+  image.alt = `${book.title ?? book.Title ?? "Book"} cover`;
+  image.width = 40;
+  image.height = 56;
+  image.style.objectFit = "cover";
+  return image;
+}
+
+function createBookActions(book) {
+  const bookId = book.id ?? book.ID;
+  const actions = document.createElement("div");
+  actions.className = "actions";
+
+  for (const [action, label, className] of [
+    ["update", "Update", "button button--small"],
+    ["delete", "Delete", "button button--small button--danger"],
+  ]) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = className;
+    button.dataset.action = action;
+    button.dataset.id = bookId;
+    button.textContent = label;
+    actions.append(button);
+  }
+
+  return actions;
+}
+
+const BOOK_COLUMNS = [
+  { value: (book) => book.id ?? book.ID },
+  { render: createBookCover },
+  { value: (book) => book.title ?? book.Title },
+  { value: (book) => book.isbn ?? book.ISBN },
+  { value: getAuthorNames },
+  { value: getCategoryNames },
+  { value: (book) => book.copiesCount ?? book.totalCopies ?? book.TotalCopies },
+  { value: (book) => book.publishYear ?? book.PublishYear },
+  {
+    render: (book) => {
+      const isAvailable = book.isAvailable ?? book.IsAvailable;
+      const badge = document.createElement("span");
+      badge.className = `badge ${isAvailable ? "badge--success" : "badge--danger"}`;
+      badge.textContent = isAvailable ? "Available" : "Unavailable";
+      return badge;
+    },
+  },
+  { render: createBookActions },
+];
+
 function OpenAddBook() {
-    const url = new URL(`BookForm.html`, document.baseURI);
-    window.open(url.href,  "_blank",
-        "width=1000,height=800,resizable=no,scrollbars=yes"
-    );
+  const url = new URL("BookForm.html", document.baseURI);
+  window.open(url.href, "_blank", "width=1000,height=800,resizable=no,scrollbars=yes");
 }
-function  OpenUpdateBook(bookId) {
-        const url = new URL(
-        `BookForm.html?id=${bookId}`,
-        document.baseURI
-    );
-    window.open(url.href,  "_blank",
-        "width=1000,height=800,resizable=no,scrollbars=yes"
-    );
+
+function OpenUpdateBook(bookId) {
+  const url = new URL(`BookForm.html?id=${bookId}`, document.baseURI);
+  window.open(url.href, "_blank", "width=1000,height=800,resizable=no,scrollbars=yes");
 }
-tbody.addEventListener("click", async event => {
-    const actionLink = event.target.closest("a[data-action]");
 
-    if (!actionLink) {
-        return;
+async function handleDeleteBook({ id, button }) {
+  if (!window.confirm("Are you sure you want to delete this book?")) return;
+
+  try {
+    button.disabled = true;
+    button.textContent = "Deleting...";
+    await Books.deleteBook(id);
+    await LoadBooks();
+  } catch (error) {
+    console.error("Failed to delete book:", error);
+    alert(`Failed to delete book: ${error.message}`);
+    button.disabled = false;
+    button.textContent = "Delete";
+  }
+}
+
+export async function LoadBooks() {
+  const tableBody = document.getElementById("booksTableBody");
+  if (!tableBody) {
+    console.error("Table body not found: #booksTableBody");
+    return;
+  }
+
+  showTableMessage(tableBody, "Loading books...", BOOK_COLUMNS.length);
+
+  try {
+    const books = await Books.BooksList();
+
+    if (!Array.isArray(books) || books.length === 0) {
+      showTableMessage(tableBody, "No books found.", BOOK_COLUMNS.length);
+      return;
     }
 
-    event.preventDefault();
-    const bookId = actionLink.dataset.bookid;
+    renderTableRows(tableBody, books, BOOK_COLUMNS);
+    attachTableActionHandler(tableBody, {
+      update: ({ id }) => OpenUpdateBook(id),
+      delete: handleDeleteBook,
+    });
+  } catch (error) {
+    console.error("Failed to load books:", error);
+    showTableMessage(tableBody, "Could not load books. Please refresh the page.", BOOK_COLUMNS.length);
+  }
+}
 
-    if (actionLink.dataset.action === "delete") {
-        try {
-            await Books.deleteBook(bookId);
-            actionLink.closest("tr").remove();
-        } catch (error) {
-            alert("Failed to delete book Because it's link on another table", error);
-        }
-    }
-    if (actionLink.dataset.action === "update")
-    {
-        try {
-            OpenUpdateBook(bookId);
-        } catch (error) {
-            alert(`Failed to Update book ${error}`);
-        }
-    }
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("createBook")?.addEventListener("click", OpenAddBook);
+  LoadBooks();
 });
-
-createBook.addEventListener("click", OpenAddBook);
-
-document.addEventListener("DOMContentLoaded", LoadBooks());

@@ -1,11 +1,11 @@
-import { BooksList,GetBookByID } from "./Books.js";
+//import { BooksList,GetBookByID } from "./Books.js";
 import { login/*, logout*/ } from "./Users.js";
 /*import { getAuthors } from "./Authors.js";
 import { getAllUsers, refreshAccessToken } from "./Users.js";
-import { getMembers } from "./Memebers.js";
 import { getBorrowings } from "./Borrowings.js";
 import { getAllUserProfiles } from "./UsersProfile.js";*/
 import { getDashboardStats, GetBooksByCategory,GetPopularBooksIsReturned } from "./Dashboard.js";
+import * as Members from "./Members.js";
 
 async function test() {
 
@@ -54,12 +54,10 @@ async function test() {
         console.log("Fetch again after Logout");
         const authors3 = await getAuthors();
         const Users3 = await getAllUsers();
-        const Memeber3 = await getMembers();
         const Borrowings3 = await getBorrowings();
         const UserProfiles3 = await getAllUserProfiles();
         console.log(authors3);
         console.log(Users3);
-        console.log(Memeber3);
         console.log(Borrowings3);
         console.log(UserProfiles3);*/
         /*const Dashbaord = await getDashboardStats();
@@ -68,9 +66,10 @@ async function test() {
         console.log(Dashbaord);
         console.log(BooksByCategory);
         console.log(PopularBooksIsReturned);*/
+        const Memeber = await Members.getMembers();
+        console.log(Memeber);
         
-        const book = await GetBookByID(1006);
-        console.log(book);
+        const addNewMember = await Members.addMember();
         
         
     }

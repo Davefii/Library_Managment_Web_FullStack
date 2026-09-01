@@ -1,112 +1,69 @@
 import { deleteMember, getMembers } from "../../API_service_layer/Members.js";
+import {
+  attachTableActionHandler,
+  formatDate,
+  renderTableRows,
+  showTableMessage,
+} from "../SharedModules/TableRenderer.js";
 
-const MEMBERS_TABLE_COLUMN_COUNT = 7;
+const MEMBER_COLUMNS = [
+  { value: (member) => member.name },
+  { value: (member) => member.user?.email },
+  { value: (member) => member.phone },
+  { value: (member) => member.address },
+  {
+    render: (member) => {
+      const statusBadge = document.createElement("span");
+      statusBadge.className = `badge ${member.isActive ? "badge--success" : "badge--danger"}`;
+      statusBadge.textContent = member.isActive ? "Active" : "Inactive";
+      return statusBadge;
+    },
+  },
+  { value: (member) => formatDate(member.membershipExpiryDate) },
+  {
+    render: (member) => {
+      const actions = document.createElement("div");
+      actions.className = "actions";
 
-function formatDate(dateValue) {
-  if (!dateValue) return "-";
+      const updateButton = document.createElement("button");
+      updateButton.type = "button";
+      updateButton.className = "button button--small";
+      updateButton.dataset.action = "update";
+      updateButton.dataset.id = member.id;
+      updateButton.textContent = "Update";
 
-  const date = new Date(dateValue);
-  return Number.isNaN(date.getTime())
-    ? "-"
-    : date.toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      });
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "button button--small button--danger";
+      deleteButton.dataset.action = "delete";
+      deleteButton.dataset.id = member.id;
+      deleteButton.textContent = "Delete";
+
+      actions.append(updateButton, deleteButton);
+      return actions;
+    },
+  },
+];
+
+function handleUpdateMember({ id }) {
+  // Member update navigation will be added later.
+  console.log(`Update member ${id}`);
 }
 
-function createTableCell(value) {
-  const cell = document.createElement("td");
-  cell.textContent = value ?? "-";
-  return cell;
-}
+async function handleDeleteMember({ id, button }) {
+  if (!window.confirm("Are you sure you want to delete this member?")) return;
 
-function showTableMessage(tableBody, message) {
-  tableBody.replaceChildren();
-
-  const row = document.createElement("tr");
-  const cell = document.createElement("td");
-  cell.colSpan = MEMBERS_TABLE_COLUMN_COUNT;
-  cell.className = "empty-state";
-  cell.textContent = message;
-  row.append(cell);
-  tableBody.append(row);
-}
-
-function createMemberRow(member) {
-  const row = document.createElement("tr");
-  row.dataset.memberId = member.id;
-
-  row.append(
-    createTableCell(member.name),
-    createTableCell(member.user?.email),
-    createTableCell(member.phone),
-    createTableCell(member.address),
-  );
-
-  const statusCell = document.createElement("td");
-  const statusBadge = document.createElement("span");
-  statusBadge.className = `badge ${member.isActive ? "badge--success" : "badge--danger"}`;
-  statusBadge.textContent = member.isActive ? "Active" : "Inactive";
-  statusCell.append(statusBadge);
-  row.append(statusCell, createTableCell(formatDate(member.membershipExpiryDate)));
-
-  const actionsCell = document.createElement("td");
-  const actions = document.createElement("div");
-  actions.className = "actions";
-
-  const updateButton = document.createElement("button");
-  updateButton.type = "button";
-  updateButton.className = "button button--small";
-  updateButton.dataset.action = "update";
-  updateButton.dataset.id = member.id;
-  updateButton.textContent = "Update";
-
-  const deleteButton = document.createElement("button");
-  deleteButton.type = "button";
-  deleteButton.className = "button button--small button--danger";
-  deleteButton.dataset.action = "delete";
-  deleteButton.dataset.id = member.id;
-  deleteButton.textContent = "Delete";
-
-  actions.append(updateButton, deleteButton);
-  actionsCell.append(actions);
-  row.append(actionsCell);
-  return row;
-}
-
-function attachMemberActionHandler(tableBody) {
-  if (tableBody.dataset.actionsReady === "true") return;
-  tableBody.dataset.actionsReady = "true";
-
-  tableBody.addEventListener("click", async (event) => {
-    const button = event.target.closest("button[data-action]");
-    if (!button) return;
-
-    if (button.dataset.action === "update") {
-      // The update page/behavior will be added later.
-      return;
-    }
-
-    if (button.dataset.action !== "delete") return;
-
-    const memberId = button.dataset.id;
-    if (!memberId) return;
-
-    if (!window.confirm("Are you sure you want to delete this member?")) return;
-
-    try {
-      button.disabled = true;
-      button.textContent = "Deleting...";
-      await deleteMember(memberId);
-      await LoadMembers();
-    } catch (error) {
-      console.error("Failed to delete member:", error);
-      alert(`Could not delete the member: ${error.message}`);
-      button.disabled = false;
-      button.textContent = "Delete";
-    }
-  });
+  try {
+    button.disabled = true;
+    button.textContent = "Deleting...";
+    await deleteMember(id);
+    await LoadMembers();
+  } catch (error) {
+    console.error("Failed to delete member:", error);
+    alert(`Could not delete the member: ${error.message}`);
+    button.disabled = false;
+    button.textContent = "Delete";
+  }
 }
 
 export async function LoadMembers() {
@@ -116,22 +73,28 @@ export async function LoadMembers() {
     return;
   }
 
-  showTableMessage(tableBody, "Loading members...");
+  showTableMessage(tableBody, "Loading members...", MEMBER_COLUMNS.length);
 
   try {
     const members = await getMembers();
 
     if (!Array.isArray(members) || members.length === 0) {
-      showTableMessage(tableBody, "No members found.");
+      showTableMessage(tableBody, "No members found.", MEMBER_COLUMNS.length);
       return;
     }
 
-    const memberRows = members.map(createMemberRow);
-    tableBody.replaceChildren(...memberRows);
-    attachMemberActionHandler(tableBody);
+    renderTableRows(tableBody, members, MEMBER_COLUMNS);
+    attachTableActionHandler(tableBody, {
+      update: handleUpdateMember,
+      delete: handleDeleteMember,
+    });
   } catch (error) {
     console.error("Failed to load members:", error);
-    showTableMessage(tableBody, "Could not load members. Please refresh the page.");
+    showTableMessage(
+      tableBody,
+      "Could not load members. Please refresh the page.",
+      MEMBER_COLUMNS.length,
+    );
   }
 }
 
