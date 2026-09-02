@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Form | Library Online</title>
+    <link rel="stylesheet" href="../admin-pages.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="card form-card" aria-labelledby="user-form-title">
+        <header class="page-title">
+          <h1 id="user-form-title">User</h1>
+          <p id="user-form-description">Create a new application user.</p>
+        </header>
+
+        <form id="user-form" class="form-grid" action="#" method="post">
+          <div class="form-group form-group--full">
+            <label for="user-email">Email</label>
+            <input class="input" id="user-email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="form-group form-group--full">
+            <label for="user-password">Password</label>
+            <input class="input" id="user-password" name="password" type="password" autocomplete="new-password" minlength="8" required />
+          </div>
+
+          <div class="form-group">
+            <label for="user-role">Role</label>
+            <select class="select" id="user-role" name="role" required>
+              <option value="Admin">Admin</option>
+              <option value="Member" selected>Member</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="user-is-active">Status</label>
+            <label>
+              <input id="user-is-active" name="isActive" type="checkbox" checked />
+              Active user
+            </label>
+          </div>
+
+          <div class="form-actions form-group--full">
+            <a class="button" id="cancel-user-button" href="Users.html">Cancel</a>
+            <button class="button button--primary" id="save-user-button" type="submit">Save User</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="UserFormManager.js"></script>
+  </body>
+</html>

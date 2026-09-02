@@ -23,16 +23,6 @@
           </button>
         </div>
       </header>
-      <section class="card toolbar">
-        <div class="search-box">
-          <input
-            class="input"
-            id="searchInput"
-            type="search"
-            placeholder="Search categories..."
-          />
-        </div>
-      </section>
       <section class="card">
         <div class="table-wrapper">
           <table class="data-table">
@@ -41,21 +31,15 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Parent Category</th>
+                <th>Books</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody id="categoriesTableBody"></tbody>
           </table>
         </div>
-        <div class="empty-state" id="emptyState">No categories loaded.</div>
-        <footer class="pagination">
-          <span id="itemsCount">0 items</span>
-          <div class="pagination-actions">
-            <button class="button button--small" type="button">Previous</button
-            ><button class="button button--small" type="button">Next</button>
-          </div>
-        </footer>
       </section>
     </main>
+    <script type="module" src="ScriptCategories.js"></script>
   </body>
 </html>

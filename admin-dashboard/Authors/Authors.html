@@ -23,22 +23,13 @@
           </button>
         </div>
       </header>
-      <section class="card toolbar">
-        <div class="search-box">
-          <input
-            class="input"
-            id="searchInput"
-            type="search"
-            placeholder="Search authors..."
-          />
-        </div>
-      </section>
       <section class="card">
         <div class="table-wrapper">
           <table class="data-table">
             <thead>
               <tr>
-                <th>Author</th>
+                <th>Image</th>
+                <th>Author Name</th>
                 <th>Nationality</th>
                 <th>Birth Date</th>
                 <th>Biography</th>
@@ -48,15 +39,8 @@
             <tbody id="authorsTableBody"></tbody>
           </table>
         </div>
-        <div class="empty-state" id="emptyState">No authors loaded.</div>
-        <footer class="pagination">
-          <span id="itemsCount">0 items</span>
-          <div class="pagination-actions">
-            <button class="button button--small" type="button">Previous</button
-            ><button class="button button--small" type="button">Next</button>
-          </div>
-        </footer>
       </section>
     </main>
+    <script type="module" src="ScriptAuthors.js"></script>
   </body>
 </html>

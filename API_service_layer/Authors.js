@@ -106,33 +106,15 @@ export async function updateAuthor(id, author) {
 
     const formData = new FormData();
 
-    if (author.firstName) {
-        formData.append("FirstName", author.firstName);
-    }
-
-    if (author.lastName) {
-        formData.append("LastName", author.lastName);
-    }
-
-    if (author.biography) {
-        formData.append("Biography", author.biography);
-    }
-
-    if (author.nationality) {
-        formData.append("Nationality", author.nationality);
-    }
-
-    if (author.birthDate) {
-        formData.append("BirthDate", author.birthDate);
-    }
+    formData.append("FirstName", author.firstName ?? "");
+    formData.append("LastName", author.lastName ?? "");
+    formData.append("Biography", author.biography ?? "");
+    formData.append("Nationality", author.nationality ?? "");
+    formData.append("BirthDate", author.birthDate ?? "");
 
     if (author.imageAuthor) {
         formData.append("ImageAuthor", author.imageAuthor);
     }
-
-    // Required according to your UpdateAuthorRequest
-    formData.append("AuthorName", author.authorName);
-    formData.append("Category", author.category);
 
     const response = await fetch(
         `${API_URL}UpdateAuthor${id}`,

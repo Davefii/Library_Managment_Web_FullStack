@@ -15,16 +15,6 @@
         </div>
         <div class="header-actions"></div>
       </header>
-      <section class="card toolbar">
-        <div class="search-box">
-          <input
-            class="input"
-            id="searchInput"
-            type="search"
-            placeholder="Search audit events..."
-          />
-        </div>
-      </section>
       <section class="card">
         <div class="table-wrapper">
           <table class="data-table">
@@ -40,15 +30,8 @@
             <tbody id="auditLogsTableBody"></tbody>
           </table>
         </div>
-        <div class="empty-state" id="emptyState">No audit logs loaded.</div>
-        <footer class="pagination">
-          <span id="itemsCount">0 items</span>
-          <div class="pagination-actions">
-            <button class="button button--small" type="button">Previous</button
-            ><button class="button button--small" type="button">Next</button>
-          </div>
-        </footer>
       </section>
     </main>
+    <script type="module" src="ScriptAuditLogs.js"></script>
   </body>
 </html>

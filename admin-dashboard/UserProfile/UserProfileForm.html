@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Profile Form | Library Online</title>
+    <link rel="stylesheet" href="../admin-pages.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="card form-card" aria-labelledby="user-profile-form-title">
+        <header class="page-title">
+          <h1 id="user-profile-form-title">User Profile</h1>
+          <p id="user-profile-form-description">Create a user profile.</p>
+        </header>
+
+        <form id="user-profile-form" class="form-grid" action="#" method="post">
+          <div class="form-group form-group--full">
+            <label for="profile-user-id">User</label>
+            <select class="select" id="profile-user-id" name="userId" required>
+              <option value="">Loading users...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="profile-first-name">First name</label>
+            <input class="input" id="profile-first-name" name="firstName" type="text" autocomplete="given-name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="profile-last-name">Last name</label>
+            <input class="input" id="profile-last-name" name="lastName" type="text" autocomplete="family-name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="profile-phone-number">Phone number</label>
+            <input class="input" id="profile-phone-number" name="phoneNumber" type="tel" autocomplete="tel" />
+          </div>
+
+          <div class="form-group form-group--full">
+            <label for="profile-address">Address</label>
+            <textarea class="textarea" id="profile-address" name="address" rows="4" autocomplete="street-address"></textarea>
+          </div>
+
+          <div class="form-actions form-group--full">
+            <a class="button" id="cancel-user-profile-button" href="UserProfileManager.html">Cancel</a>
+            <button class="button button--primary" id="save-user-profile-button" type="submit">Save User Profile</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="UserProfileFormManager.js"></script>
+  </body>
+</html>
