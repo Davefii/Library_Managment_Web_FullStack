@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Overview | Member Dashboard</title>
+    <link rel="stylesheet" href="MemberDashboard.css" />
+  </head>
+  <body>
+    <main class="dashboard">
+      <section class="welcome-card">
+        <div>
+          <p class="eyebrow">MEMBER DASHBOARD</p>
+          <h1>Welcome back, <span id="memberName">Member</span></h1>
+          <p class="welcome-text">Manage your borrowings and keep track of your membership.</p>
+        </div>
+        <div class="membership-summary">
+          <div class="membership-status"><span class="status-dot"></span><span id="membershipStatus">Active</span></div>
+          <div class="expiry"><span>Membership expires</span><strong id="membershipExpiry">--</strong></div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-heading"><div><p class="eyebrow">OVERVIEW</p><h2>Your borrowing activity</h2></div></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon">TB</div><div><span>Total borrowings</span><strong id="totalBorrowings">0</strong></div></article>
+          <article class="stat-card"><div class="stat-icon">AB</div><div><span>Active borrowings</span><strong id="activeBorrowings">0</strong></div></article>
+          <article class="stat-card"><div class="stat-icon">RB</div><div><span>Returned books</span><strong id="returnedBooks">0</strong></div></article>
+          <article class="stat-card stat-card--warning"><div class="stat-icon">OD</div><div><span>Overdue books</span><strong id="overdueBooks">0</strong></div></article>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="MemberDashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Member Dashboard | Library Online</title>
+    <link rel="stylesheet" href="MemberDashboard.css" />
+  </head>
+  <body>
+    <header class="member-header">
+      <a class="member-brand" href="../home/index.html">Library Online</a>
+      <nav class="member-nav" aria-label="Member dashboard navigation">
+        <a aria-current="page" data-page="Overview.html" href="Overview.html">Overview</a>
+        <a data-page="CurrentlyBorrowed.html" href="CurrentlyBorrowed.html">Currently borrowed</a>
+        <a data-page="RecentActivity.html" href="RecentActivity.html">Recent activity</a>
+        <a data-page="Membership.html" href="Membership.html">Membership</a>
+        <a data-page="Profile.html" href="Profile.html">My profile</a>
+      </nav>
+    </header>
+    <main class="dashboard-shell">
+      <iframe id="memberFrame" title="Member dashboard page" src="Overview.html"></iframe>
+    </main>
+    <script src="MemberDashboardNavigator.js"></script>
+    <script type="module" src="MemberDashboard.js"></script>
+  </body>
+</html>
