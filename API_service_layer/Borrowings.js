@@ -147,3 +147,153 @@ export async function getOverdueBooks() {
 
     return await handleResponse(response);
 }
+
+
+// GET RECENT BORROWINGS FOR CURRENT MEMBER
+export async function getRecentBorrowingsForMember() {
+
+    const response = await fetch(
+        `${API_URL}RecentBorrowingsForMember`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+
+// GET RECENT BORROWINGS FOR MEMBER
+export async function getRecentBorrowingsForMemberById(memberId) {
+
+    const response = await fetch(
+        `${API_URL}RecentBorrowingsForMember/${encodeURIComponent(memberId)}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+
+// GET TOTAL BORROWINGS FOR CURRENT MEMBER
+export async function getTotalBorrowingsForMember() {
+
+    const response = await fetch(
+        `${API_URL}TotalBorrowingsForMember`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+
+// GET TOTAL BORROWINGS FOR MEMBER
+export async function getTotalBorrowingsForMemberById(memberId) {
+
+    const response = await fetch(
+        `${API_URL}TotalBorrowingsForMember/${encodeURIComponent(memberId)}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+
+// GET ACTIVE BORROWINGS FOR CURRENT MEMBER
+export async function getActiveBorrowingsForMember() {
+
+    const response = await fetch(
+        `${API_URL}ActiveBorrowingsForMember`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+
+// GET ACTIVE BORROWINGS FOR MEMBER
+export async function getActiveBorrowingsForMemberById(memberId) {
+
+    const response = await fetch(
+        `${API_URL}ActiveBorrowingsForMember/${encodeURIComponent(memberId)}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+
+// GET RETURNED BORROWINGS FOR CURRENT MEMBER
+export async function getReturnedBorrowingsForMember() {
+
+    const response = await fetch(
+        `${API_URL}ReturnedBorrowingsForMember`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+
+// GET RETURNED BORROWINGS FOR MEMBER
+export async function getReturnedBorrowingsForMemberById(memberId) {
+
+    const response = await fetch(
+        `${API_URL}ReturnedBorrowingsForMember/${encodeURIComponent(memberId)}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+
+// GET OVERDUE BORROWINGS FOR CURRENT MEMBER
+export async function getOverdueBorrowingsForMember() {
+
+    const response = await fetch(
+        `${API_URL}OverdueBorrowingsForMember`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+
+// GET OVERDUE BORROWINGS FOR MEMBER
+export async function getOverdueBorrowingsForMemberById(memberId) {
+
+    const response = await fetch(
+        `${API_URL}OverdueBorrowingsForMember/${encodeURIComponent(memberId)}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
