@@ -308,6 +308,53 @@ td:first-child {
     margin-bottom: 20px
 }
 
+.profile-form {
+    display: grid;
+    gap: 18px;
+    max-width: 720px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px
+}
+
+.profile-form-field {
+    display: grid;
+    gap: 7px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700
+}
+
+.profile-form-field input,
+.profile-form-field textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 10px 12px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-weight: 400
+}
+
+.profile-form-field input:focus,
+.profile-form-field textarea:focus {
+    outline: 2px solid rgba(95, 107, 45, .18);
+    border-color: var(--primary)
+}
+
+.profile-form-field input[readonly] {
+    background: var(--bg)
+}
+
+.profile-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 4px
+}
+
 .profile-card {
     padding: 0 24px
 }
@@ -410,6 +457,14 @@ td:first-child {
     .profile-row strong {
         max-width: 100%;
         text-align: left
+    }
+
+    .profile-form {
+        padding: 18px
+    }
+
+    .profile-form-actions {
+        flex-direction: column-reverse
     }
 }
 

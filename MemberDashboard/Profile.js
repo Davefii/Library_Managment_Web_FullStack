@@ -8,24 +8,16 @@ const elements = {
     profileAddress: document.getElementById("profileAddress")
 };
 
-let currentMemberId;
-
 async function loadProfile() {
     const member = getMember(await getMe());
-    currentMemberId = getValue(member, "id", "memberId", "memberID");
     elements.profileName.textContent = getValue(member, "name", "fullName") ?? "--";
-    elements.profileEmail.textContent = getValue(member, "email") ?? "--";
+    elements.profileEmail.textContent = getValue(getValue(member, "user"), "email") ?? "--";
     elements.profilePhone.textContent = getValue(member, "phone") ?? "--";
     elements.profileAddress.textContent = getValue(member, "address") ?? "--";
 }
 
 document.getElementById("editProfileButton")?.addEventListener("click", () => {
-    if (!currentMemberId) {
-        alert("Member information is still loading. Please try again.");
-        return;
-    }
-
-    const formUrl = `../admin-dashboard/Members/MemberFrom.html?id=${encodeURIComponent(currentMemberId)}`;
+    const formUrl = "ProfileForm.html";
     const editWindow = window.open(
         formUrl,
         "MemberEditWindow",

@@ -1,6 +1,5 @@
 const memberFrame = document.getElementById("memberFrame");
 const navigationLinks = document.querySelectorAll(".member-nav a");
-const user = await login("memberJohn123@gmail.com","123");
 navigationLinks.forEach(link => {
     link.addEventListener("click", event => {
         event.preventDefault();

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Profile | Member Dashboard</title>
+    <link rel="stylesheet" href="MemberDashboard.css" />
+  </head>
+  <body>
+    <main class="dashboard profile-form-page">
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">MY PROFILE</p>
+            <h1>Edit personal information</h1>
+          </div>
+        </div>
+        <form id="profile-form" class="profile-form">
+          <label class="profile-form-field" for="profile-name">
+            <span>Full name</span>
+            <input id="profile-name" name="name" type="text" autocomplete="name" required />
+          </label>
+          <label class="profile-form-field" for="profile-phone">
+            <span>Phone number</span>
+            <input id="profile-phone" name="phone" type="tel" autocomplete="tel" required />
+          </label>
+          <label class="profile-form-field" for="profile-address">
+            <span>Address</span>
+            <textarea id="profile-address" name="address" rows="4" autocomplete="street-address" required></textarea>
+          </label>
+          <label class="profile-form-field" for="membership-expiry-date">
+            <span>Membership expiry date</span>
+            <input id="membership-expiry-date" name="membershipExpiryDate" type="date" readonly />
+          </label>
+          <div class="profile-form-actions">
+            <button class="button" id="cancel-profile-button" type="button">Cancel</button>
+            <button class="button button--primary" id="save-profile-button" type="submit">Save changes</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="ProfileForm.js"></script>
+  </body>
+</html>
