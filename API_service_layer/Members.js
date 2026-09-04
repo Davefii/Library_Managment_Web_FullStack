@@ -95,7 +95,7 @@ export async function addMember(member) {
 export async function updateMyInformation(member) {
 
     const response = await fetch(
-        `${API_URL}UpdateMyInformationMember`,
+        `${API_URL}UpdateMyInfomationMember`,
         {
             method: "PUT",
             credentials: "include",
