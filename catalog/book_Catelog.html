@@ -59,92 +59,12 @@
               </select>
             </div>
           </header>
-          <div class="catalog-grid">
-            <article class="book-card card">
-              <div class="book-card__cover book-cover--olive">CC</div>
-              <div class="book-card__body">
-                <span class="badge badge--success">Available</span>
-                <h3>Clean Code</h3>
-                <p>Robert C. Martin</p>
-                <div class="book-card__actions">
-                  <a
-                    class="button button--primary button--small"
-                    href="../book-details/index.html?id=1"
-                    >Details</a
-                  ><button
-                    class="button button--secondary button--small"
-                    type="button"
-                  >
-                    Borrow
-                  </button>
-                </div>
-              </div>
-            </article>
-            <article class="book-card card">
-              <div class="book-card__cover book-cover--sand">DP</div>
-              <div class="book-card__body">
-                <span class="badge badge--success">Available</span>
-                <h3>Design Patterns</h3>
-                <p>Erich Gamma</p>
-                <div class="book-card__actions">
-                  <a
-                    class="button button--primary button--small"
-                    href="../book-details/index.html?id=2"
-                    >Details</a
-                  ><button
-                    class="button button--secondary button--small"
-                    type="button"
-                  >
-                    Borrow
-                  </button>
-                </div>
-              </div>
-            </article>
-            <article class="book-card card">
-              <div class="book-card__cover book-cover--slate">C#</div>
-              <div class="book-card__body">
-                <span class="badge badge--warning">On loan</span>
-                <h3>C# in Depth</h3>
-                <p>Jon Skeet</p>
-                <div class="book-card__actions">
-                  <a
-                    class="button button--primary button--small"
-                    href="../book-details/index.html?id=3"
-                    >Details</a
-                  ><button
-                    class="button button--secondary button--small"
-                    type="button"
-                  >
-                    Reserve
-                  </button>
-                </div>
-              </div>
-            </article>
-            <article class="book-card card">
-              <div class="book-card__cover book-cover--clay">PG</div>
-              <div class="book-card__body">
-                <span class="badge badge--success">Available</span>
-                <h3>The Pragmatic Programmer</h3>
-                <p>David Thomas</p>
-                <div class="book-card__actions">
-                  <a
-                    class="button button--primary button--small"
-                    href="../book-details/index.html?id=4"
-                    >Details</a
-                  ><button
-                    class="button button--secondary button--small"
-                    type="button"
-                  >
-                    Borrow
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
+          <div id="catalog-grid" class="catalog-grid"></div>
         </section>
       </section>
     </main>
     <div id="footer"></div>
     <script type="module" src="../js/layout.js"></script>
+    <script type="module" src="../js/catalog-books.js"></script>
   </body>
 </html>

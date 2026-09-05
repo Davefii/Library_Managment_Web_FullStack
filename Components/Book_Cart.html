@@ -43,9 +43,23 @@
                     color: var(--color-text-muted);
                     font-size: .8rem
                 }
+
+                                .book-cover img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                        border-radius: inherit
+                                }
             </style>
-            <article class="book-preview">
-              <div class="book-cover book-cover--olive">CC</div>
-              <h3>Clean Code</h3>
-              <p>Robert C. Martin</p>
+                        <article class="book-card book-preview card" data-book-card>
+                            <div class="book-card__cover book-cover book-cover--olive" data-book-cover></div>
+                            <div class="book-card__body">
+                                <span class="badge badge--success" data-book-availability></span>
+                                <h3 data-book-title></h3>
+                                <p data-book-author></p>
+                                <p data-book-category></p>
+                                <div class="book-card__actions">
+                                    <a class="button button--primary button--small" data-book-details>Details</a>
+                                </div>
+                            </div>
             </article>
