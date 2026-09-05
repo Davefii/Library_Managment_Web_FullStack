@@ -1,5 +1,4 @@
 import * as Dashboard from "../../API_service_layer/Dashboard.js";
-import * as Users from "../../API_service_layer/Users.js";
 const LibrarystatisticsUI = 
 {
     totalBooks : document.getElementById("totalBooks"),
@@ -12,7 +11,6 @@ const LibrarystatisticsUI =
 const popularlist = document.getElementById("popular-list");
 const categoryPanel = document.getElementById("category-list");
 const tableBody = document.getElementById("recent-borrowings-body");
-const user = await Users.login("Jemes123@example.com","123");
 const dashbaord = await Dashboard.getDashboardStats();
 const PopularbooksList = await Dashboard.GetPopularBooksIsReturned();
 const BooksByCategory = await Dashboard.GetBooksByCategory();

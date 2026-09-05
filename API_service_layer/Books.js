@@ -31,6 +31,18 @@ export async function BooksListForAnyone() {
     );
     return await handleResponse(response);
 }
+
+export async function PapularBooksListForAnyone() {
+    
+
+        const response  = await fetch(
+      `${API_URL}GetAllPapularBooksForAnyone`,
+        {
+            method: "GET"
+        }
+    );
+    return await handleResponse(response);
+}
 export async function BooksList() {
     
 

@@ -1,3 +1,5 @@
+import { renderUserMenu } from "./auth.js";
+
 async function loadComponent(elementId, filePath) {
 
     const element = document.getElementById(elementId);
@@ -23,6 +25,10 @@ async function loadComponent(elementId, filePath) {
 
         element.innerHTML = await response.text();
 
+        if (elementId === "header") {
+            renderUserMenu();
+        }
+
     } catch (error) {
 
         console.error(
@@ -35,10 +41,11 @@ async function loadComponent(elementId, filePath) {
 
 loadComponent(
     "header",
-    "../Components/Header.html"
+    "../Components/header.html"
 );
 
 loadComponent(
     "footer",
     "../Components/Footer.html"
 );
+

@@ -1,4 +1,4 @@
-const API_URL = "https://localhost:7010/";
+const API_URL = "https://localhost:7010/api/Users/";
 
 async function handleResponse(response) {
 
@@ -57,7 +57,19 @@ export async function getUserById(id) {
 
     return await handleResponse(response);
 }
+// GET Current USER
+export async function GetCurrentUser() {
 
+    const response = await fetch(
+        `${API_URL}GetCurrentUser`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
 
 // CREATE MEMBER USER
 // This endpoint is [AllowAnonymous]
@@ -74,7 +86,10 @@ export async function registerMember(user) {
 
             body: JSON.stringify({
                 email: user.email,
-                password: user.password
+                password: user.password,
+                fullName: user.fullName,
+                phoneNumber: user.phoneNumber,
+                address: user.address
             })
         }
     );
@@ -139,62 +154,3 @@ export async function deleteUser(id) {
     return await handleResponse(response);
 }
 
-// =====================================================
-// AUTHENTICATION
-// =====================================================
-
-// LOGIN
-export async function login(email, password) {
-
-    const response = await fetch(
-        `${API_URL}api/Auth/Login`,
-        {
-            method: "POST",
-
-            credentials: "include",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                email,
-                password
-            })
-        }
-    );
-
-    return await handleResponse(response);
-}
-
-
-// REFRESH ACCESS TOKEN
-export async function refreshAccessToken() {
-
-    const response = await fetch(
-        `${API_URL}api/Auth/refresh`,
-        {
-            method: "POST",
-
-            credentials: "include"
-        }
-    );
-
-    return await handleResponse(response);
-}
-
-
-// LOGOUT
-export async function logout() {
-
-    const response = await fetch(
-        `${API_URL}api/Auth/Logout`,
-        {
-            method: "POST",
-
-            credentials: "include"
-        }
-    );
-
-    return await handleResponse(response);
-}
