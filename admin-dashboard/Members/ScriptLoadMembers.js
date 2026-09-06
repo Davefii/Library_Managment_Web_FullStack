@@ -6,6 +6,8 @@ import {
   showTableMessage,
 } from "../SharedModules/TableRenderer.js";
 
+let allMembers = [];
+
 const MEMBER_COLUMNS = [
   { value: (member) => member.name },
   { value: (member) => member.user?.email },
@@ -87,18 +89,14 @@ export async function LoadMembers() {
   showTableMessage(tableBody, "Loading members...", MEMBER_COLUMNS.length);
 
   try {
-    const members = await getMembers();
+    allMembers = await getMembers();
 
-    if (!Array.isArray(members) || members.length === 0) {
+    if (!Array.isArray(allMembers) || allMembers.length === 0) {
       showTableMessage(tableBody, "No members found.", MEMBER_COLUMNS.length);
       return;
     }
 
-    renderTableRows(tableBody, members, MEMBER_COLUMNS);
-    attachTableActionHandler(tableBody, {
-      update: handleUpdateMember,
-      delete: handleDeleteMember,
-    });
+    renderMembers(allMembers);
   } catch (error) {
     console.error("Failed to load members:", error);
     showTableMessage(
@@ -107,6 +105,40 @@ export async function LoadMembers() {
       MEMBER_COLUMNS.length,
     );
   }
+}
+
+function renderMembers(members) {
+  const tableBody = document.getElementById("membersTableBody");
+  renderTableRows(tableBody, members, MEMBER_COLUMNS);
+    attachTableActionHandler(tableBody, {
+      update: handleUpdateMember,
+      delete: handleDeleteMember,
+    });
+}
+
+function searchMembers() {
+  const searchInput = document.getElementById("searchInput");
+  const tableBody = document.getElementById("membersTableBody");
+  const searchValue = searchInput.value.trim().toLowerCase();
+
+  if (!searchValue) {
+    renderMembers(allMembers);
+    return;
+  }
+
+  const members = allMembers.filter((member) => [
+    member.name,
+    member.user?.email,
+    member.phone,
+    member.address,
+  ].some((value) => String(value ?? "").toLowerCase().includes(searchValue)));
+
+  if (!members.length) {
+    showTableMessage(tableBody, "No members found.", MEMBER_COLUMNS.length);
+    return;
+  }
+
+  renderMembers(members);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -119,5 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
     LoadMembers();
   });
 
+  document.getElementById("searchInput")?.addEventListener("input", searchMembers);
   LoadMembers();
 });

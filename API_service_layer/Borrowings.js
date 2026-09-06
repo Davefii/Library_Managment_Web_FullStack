@@ -108,7 +108,7 @@ export async function updateBorrowing(id, borrowing) {
 export async function returnBook(id) {
 
     const response = await fetch(
-        `${API_URL}returnBookBy${id}`,
+        `${API_URL}returnBookBy/${id}`,
         {
             method: "POST",
             credentials: "include"

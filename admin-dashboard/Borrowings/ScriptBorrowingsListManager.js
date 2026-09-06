@@ -6,6 +6,8 @@ import {
   showTableMessage,
 } from "../SharedModules/TableRenderer.js";
 
+let allBorrowings = [];
+
 function createButton(action, label, className, borrowingId) {
   const button = document.createElement("button");
   button.type = "button";
@@ -31,6 +33,12 @@ function createBorrowingStatus(borrowing) {
   }
 
   return badge;
+}
+
+function getBorrowingStatus(borrowing) {
+  if (borrowing.isReturned) return "Returned";
+  if (new Date(borrowing.dueDate) < new Date()) return "Overdue";
+  return "Active";
 }
 
 function createBorrowingActions(borrowing) {
@@ -115,19 +123,14 @@ export async function loadBorrowings() {
   showTableMessage(tableBody, "Loading borrowings...", BORROWING_COLUMNS.length);
 
   try {
-    const borrowings = await BorrowingService.getBorrowings();
+    allBorrowings = await BorrowingService.getBorrowings();
 
-    if (!Array.isArray(borrowings) || borrowings.length === 0) {
+    if (!Array.isArray(allBorrowings) || allBorrowings.length === 0) {
       showTableMessage(tableBody, "No borrowing records found.", BORROWING_COLUMNS.length);
       return;
     }
 
-    renderTableRows(tableBody, borrowings, BORROWING_COLUMNS);
-    attachTableActionHandler(tableBody, {
-      return: handleReturnBorrowing,
-      update: ({ id }) => OpenUpdateBorrow(id),
-      delete: handleDeleteBorrowing,
-    });
+    renderBorrowings(allBorrowings);
   } catch (error) {
     console.error("Failed to load borrowings:", error);
     showTableMessage(
@@ -138,7 +141,45 @@ export async function loadBorrowings() {
   }
 }
 
+function renderBorrowings(borrowings) {
+  const tableBody = document.getElementById("borrowingsTableBody");
+  renderTableRows(tableBody, borrowings, BORROWING_COLUMNS);
+    attachTableActionHandler(tableBody, {
+      return: handleReturnBorrowing,
+      update: ({ id }) => OpenUpdateBorrow(id),
+      delete: handleDeleteBorrowing,
+    });
+}
+
+function searchBorrowings() {
+  const searchInput = document.getElementById("searchInput");
+  const statusFilter = document.getElementById("statusFilter");
+  const tableBody = document.getElementById("borrowingsTableBody");
+  const searchValue = searchInput.value.trim().toLowerCase();
+  const selectedStatus = statusFilter.value;
+
+  const borrowings = allBorrowings.filter((borrowing) => {
+    const searchableText = [
+      borrowing.member?.name,
+      borrowing.user?.email,
+      borrowing.book?.title,
+    ].join(" ").toLowerCase();
+
+    return (!searchValue || searchableText.includes(searchValue))
+      && (!selectedStatus || getBorrowingStatus(borrowing) === selectedStatus);
+  });
+
+  if (!borrowings.length) {
+    showTableMessage(tableBody, "No borrowing records found.", BORROWING_COLUMNS.length);
+    return;
+  }
+
+  renderBorrowings(borrowings);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("createBorrowingButton")?.addEventListener("click", OpenAddBorrow);
+  document.getElementById("searchInput")?.addEventListener("input", searchBorrowings);
+  document.getElementById("statusFilter")?.addEventListener("change", searchBorrowings);
   loadBorrowings();
 });
