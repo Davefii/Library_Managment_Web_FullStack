@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Books by Category</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <main>
+      <section class="catalog-hero">
+        <div class="container">
+          <p class="section-label">Category collection</p>
+          <h1 class="page-title" data-filter-title>Books by category</h1>
+          <p class="page-subtitle" data-filter-subtitle>Loading books...</p>
+        </div>
+      </section>
+      <section class="container catalog-results filtered-results" aria-labelledby="filtered-books-heading">
+        <header class="results-toolbar">
+          <div>
+            <h2 id="filtered-books-heading">Available titles</h2>
+            <p data-filter-count></p>
+          </div>
+        </header>
+        <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
+      </section>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/layout.js"></script>
+    <script type="module" src="../js/filtered-books.js"></script>
+  </body>
+</html>
