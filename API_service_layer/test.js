@@ -1,23 +1,23 @@
 //import { BooksList,GetBookByID } from "./Books.js";
-import { login/*, logout*/ } from "./Users.js";
+//import { login/*, logout*/ } from "./Users.js";
 /*import { getAuthors } from "./Authors.js";
 import { getAllUsers, refreshAccessToken } from "./Users.js";
 import { getBorrowings } from "./Borrowings.js";
 import { getAllUserProfiles } from "./UsersProfile.js";*/
-import { getDashboardStats, GetBooksByCategory,GetPopularBooksIsReturned } from "./Dashboard.js";
-import * as Members from "./Members.js";
-
+//import { getDashboardStats, GetBooksByCategory,GetPopularBooksIsReturned } from "./Dashboard.js";
+//import * as Members from "./Members.js";
+import { ListBooksByAuthorForAnyone,ListBooksByCategorieForAnyone,TotalBooksByAuthor, TotalBooksByCategory } from "../API_service_layer/Books.js";
 async function test() {
 
     try {
 
-        const loginResult =
+        /*const loginResult =
             await login(
                 "Jemes123@example.com",
                 "123"
-            );
+            );*/
 
-        console.log("Login:", loginResult);
+        /*console.log("Login:", loginResult);*/
 
         /*const books =
             await BooksList();
@@ -66,11 +66,19 @@ async function test() {
         console.log(Dashbaord);
         console.log(BooksByCategory);
         console.log(PopularBooksIsReturned);*/
-        const Memeber = await Members.getMembers();
+        /*const Memeber = await Members.getMembers();
         console.log(Memeber);
         
-        const addNewMember = await Members.addMember();
+        const addNewMember = await Members.addMember();*/
         
+        const bookbyauthorname = await ListBooksByAuthorForAnyone(2);
+        const bookbycategorie = await ListBooksByCategorieForAnyone(1);
+        const totalBooksByAuthor = await TotalBooksByAuthor(2);
+        const totalBooksByCategory = await TotalBooksByCategory(2);
+        console.log(bookbyauthorname);
+        console.log(bookbycategorie);
+        console.log(totalBooksByAuthor);
+        console.log(totalBooksByCategory);
         
     }
     catch (error) {

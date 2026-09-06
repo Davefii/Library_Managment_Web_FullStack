@@ -32,6 +32,50 @@ export async function BooksListForAnyone() {
     return await handleResponse(response);
 }
 
+export async function TotalBooksByAuthor(authorId) {
+
+    const response = await fetch(
+        `${API_URL}TotalBooksByAuthor/${authorId}`,
+        {
+            method: "GET"
+        }
+    );
+    return await handleResponse(response);
+}
+
+export async function TotalBooksByCategory(categoryId) {
+
+    const response = await fetch(
+        `${API_URL}TotalBooksByCategory/${categoryId}`,
+        {
+            method: "GET"
+        }
+    );
+    return await handleResponse(response);
+}
+
+export async function ListBooksByAuthorForAnyone(AuthorId) {
+
+    const response = await fetch(
+        `${API_URL}ListBooksByAuthorForAnyone/${AuthorId}`,
+        {
+            method: "GET"
+        }
+    );
+    return await handleResponse(response);
+}
+
+export async function ListBooksByCategorieForAnyone(categoryId) {
+
+    const response = await fetch(
+        `${API_URL}ListBooksByCategorieForAnyone/${categoryId}`,
+        {
+            method: "GET"
+        }
+    );
+    return await handleResponse(response);
+}
+
 export async function PapularBooksListForAnyone() {
     
 
