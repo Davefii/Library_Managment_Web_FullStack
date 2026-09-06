@@ -154,9 +154,9 @@ function SearchBook() {
     const value = byWhat.value === "isbn"
       ? book.isbn ?? book.ISBN ?? ""
       : book.title ?? book.Title ?? "";
-    return String(value).toLowerCase().includes(searchValue);
+      return String(value).toLowerCase().includes(searchValue);
   });
-
+  
   if (!books.length) {
     showTableMessage(tableBody, "No books found.", BOOK_COLUMNS.length);
     return;
