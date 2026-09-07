@@ -31,8 +31,20 @@
             type="search"
             placeholder="Search borrowing"
           />
+          <button
+            class="button button--primary"
+            id="Searchbtn"
+            type="button"
+          >
+            Search Borrowing
+          </button>
         </div>
         <div class="toolbar-actions">
+          <select class="select" id="Bywhat">
+            <option value="Name">Name</option>
+            <option value="UserName">UserName</option>
+            <option value="BookTitle">BookTitle</option>
+          </select>
           <select class="select" id="statusFilter">
             <option value="">All statuses</option>
             <option value="Active">Active</option>

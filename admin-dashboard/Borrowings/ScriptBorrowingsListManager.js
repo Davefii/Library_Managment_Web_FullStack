@@ -6,8 +6,9 @@ import {
   showTableMessage,
 } from "../SharedModules/TableRenderer.js";
 
-let allBorrowings = [];
 
+const Searchbtn = document.getElementById("Searchbtn");
+const statusFilter = document.getElementById("statusFilter");
 function createButton(action, label, className, borrowingId) {
   const button = document.createElement("button");
   button.type = "button";
@@ -35,8 +36,12 @@ function createBorrowingStatus(borrowing) {
   return badge;
 }
 
+function getSelectedStatus() {
+    const statusFilter = document.getElementById("statusFilter");
+    return statusFilter ? statusFilter.value : "";
+}
 function getBorrowingStatus(borrowing) {
-  if (borrowing.isReturned) return "Returned";
+  if (borrowing.isReturned??borrowing.isreturned) return "Returned";
   if (new Date(borrowing.dueDate) < new Date()) return "Overdue";
   return "Active";
 }
@@ -113,7 +118,7 @@ async function handleDeleteBorrowing({ id, button }) {
   }
 }
 
-export async function loadBorrowings() {
+export async function loadBorrowings(status = getSelectedStatus()) {
   const tableBody = document.getElementById("borrowingsTableBody");
   if (!tableBody) {
     console.error("Table body not found: #borrowingsTableBody");
@@ -123,14 +128,21 @@ export async function loadBorrowings() {
   showTableMessage(tableBody, "Loading borrowings...", BORROWING_COLUMNS.length);
 
   try {
-    allBorrowings = await BorrowingService.getBorrowings();
+    const Borrowings = await BorrowingService.getBorrowings();
 
-    if (!Array.isArray(allBorrowings) || allBorrowings.length === 0) {
+    let borrowings;
+    if (status) {
+        borrowings = await BorrowingService.getBorrowingsByStatus(status);
+    } else {
+        borrowings = await BorrowingService.getBorrowings();
+    }
+
+    if (!Array.isArray(Borrowings) || Borrowings.length === 0) {
       showTableMessage(tableBody, "No borrowing records found.", BORROWING_COLUMNS.length);
       return;
     }
 
-    renderBorrowings(allBorrowings);
+    renderBorrowings(Borrowings);
   } catch (error) {
     console.error("Failed to load borrowings:", error);
     showTableMessage(
@@ -151,35 +163,80 @@ function renderBorrowings(borrowings) {
     });
 }
 
-function searchBorrowings() {
-  const searchInput = document.getElementById("searchInput");
-  const statusFilter = document.getElementById("statusFilter");
-  const tableBody = document.getElementById("borrowingsTableBody");
-  const searchValue = searchInput.value.trim().toLowerCase();
-  const selectedStatus = statusFilter.value;
 
-  const borrowings = allBorrowings.filter((borrowing) => {
-    const searchableText = [
-      borrowing.member?.name,
-      borrowing.user?.email,
-      borrowing.book?.title,
-    ].join(" ").toLowerCase();
 
-    return (!searchValue || searchableText.includes(searchValue))
-      && (!selectedStatus || getBorrowingStatus(borrowing) === selectedStatus);
-  });
+async function searchBorrowings() {
+      const searchInput = document.getElementById("searchInput");
+      const searchValue = searchInput.value.trim();
+      const status = getSelectedStatus();
+      const Bywhat = document.getElementById("Bywhat").value;
 
-  if (!borrowings.length) {
-    showTableMessage(tableBody, "No borrowing records found.", BORROWING_COLUMNS.length);
-    return;
-  }
+    if (!searchValue) {
+        await loadBorrowings();
+        return;
+    }
 
-  renderBorrowings(borrowings);
+
+    let borrowings = [];
+
+    try {
+      if (Bywhat === "Name") {
+        borrowings =
+            await BorrowingService.getBorrowingsByMemberName(searchValue);
+      }
+      else if (Bywhat === "UserName") {
+          borrowings =
+              await BorrowingService.getBorrowingsByUserEmail(searchValue);
+      }
+      else if (Bywhat === "BookTitle") {
+          borrowings =
+              await BorrowingService.getBorrowingsByBookTitle(searchValue);
+      }
+      else
+      {
+        borrowings = await BorrowingService.getBorrowings();
+      }
+      if (status) {
+            switch (status) {
+              case "Active":
+                borrowings =  await BorrowingService.getBorrowingsByStatus(status);
+                break;
+              case "Returned":
+                borrowings =  await BorrowingService.getBorrowingsByStatus(status);
+                break;
+              case "Overdue":
+                borrowings =  await BorrowingService.getBorrowingsByStatus(status);
+                break;
+              default:
+                borrowings = await BorrowingService.getBorrowings();
+                break;
+            }
+      }
+
+        if (borrowings.length === 0) {
+            const tableBody = document.getElementById("borrowingsTableBody");
+            showTableMessage(tableBody, "No borrowing records match your search.", BORROWING_COLUMNS.length);
+            return;
+        }
+          renderBorrowings(borrowings);
+    } 
+    catch (error)
+    {
+      console.error(error);
+      const tableBody = document.getElementById("borrowingsTableBody");
+      showTableMessage(tableBody, "Search failed. Please try again.", BORROWING_COLUMNS.length);
+    }
 }
 
+if (statusFilter) {
+    statusFilter.addEventListener("change", () => {
+        // Optionally clear search input to avoid confusion
+        // document.getElementById("searchInput").value = "";
+        loadBorrowings(); // uses the new status
+    });
+}
+Searchbtn.addEventListener("click", searchBorrowings);
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("createBorrowingButton")?.addEventListener("click", OpenAddBorrow);
-  document.getElementById("searchInput")?.addEventListener("input", searchBorrowings);
-  document.getElementById("statusFilter")?.addEventListener("change", searchBorrowings);
   loadBorrowings();
 });

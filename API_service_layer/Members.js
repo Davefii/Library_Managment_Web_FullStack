@@ -36,6 +36,31 @@ export async function getMembers() {
     return await handleResponse(response);
 }
 
+export async function GetAllMembersByName(Name) {
+
+    const response = await fetch(
+        `${API_URL}ListMembersByName/${Name}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+export async function GetAllMembersByEmail(Email) {
+
+    const response = await fetch(
+        `${API_URL}ListMembersByUserEmail/${Email}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
 
 // GET CURRENT MEMBER
 export async function getMe() {

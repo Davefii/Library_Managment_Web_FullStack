@@ -1,4 +1,4 @@
-import { deleteMember, getMembers } from "../../API_service_layer/Members.js";
+import { deleteMember, getMembers, GetAllMembersByEmail,GetAllMembersByName} from "../../API_service_layer/Members.js";
 import {
   attachTableActionHandler,
   formatDate,
@@ -6,8 +6,8 @@ import {
   showTableMessage,
 } from "../SharedModules/TableRenderer.js";
 
-let allMembers = [];
 
+const BtnSearchMember = document.getElementById("Search-member-button");
 const MEMBER_COLUMNS = [
   { value: (member) => member.name },
   { value: (member) => member.user?.email },
@@ -89,14 +89,14 @@ export async function LoadMembers() {
   showTableMessage(tableBody, "Loading members...", MEMBER_COLUMNS.length);
 
   try {
-    allMembers = await getMembers();
+    const Members = await getMembers();
 
-    if (!Array.isArray(allMembers) || allMembers.length === 0) {
+    if (!Array.isArray(Members) || Members.length === 0) {
       showTableMessage(tableBody, "No members found.", MEMBER_COLUMNS.length);
       return;
     }
 
-    renderMembers(allMembers);
+    renderMembers(Members);
   } catch (error) {
     console.error("Failed to load members:", error);
     showTableMessage(
@@ -116,41 +116,54 @@ function renderMembers(members) {
     });
 }
 
-function searchMembers() {
+async function searchMembers() {
   const searchInput = document.getElementById("searchInput");
   const tableBody = document.getElementById("membersTableBody");
   const searchValue = searchInput.value.trim().toLowerCase();
-
+  const Bywhat = document.getElementById("Bywhat").value;
   if (!searchValue) {
-    renderMembers(allMembers);
+    await LoadMembers();
     return;
   }
+  let Members = [];
 
-  const members = allMembers.filter((member) => [
-    member.name,
-    member.user?.email,
-    member.phone,
-    member.address,
-  ].some((value) => String(value ?? "").toLowerCase().includes(searchValue)));
 
-  if (!members.length) {
-    showTableMessage(tableBody, "No members found.", MEMBER_COLUMNS.length);
-    return;
+  try {
+      switch (Bywhat) {
+        case "Name":
+          Members = await GetAllMembersByName(searchValue);
+          break;
+          case "UserName":
+            Members = await GetAllMembersByEmail(searchValue);
+          break;
+        default:
+          Members = await getMembers();
+          break;
+      }
+    if (!Members.length) {
+      showTableMessage(tableBody, "No members found.", MEMBER_COLUMNS.length);
+      return;
+    }
+
+    renderMembers(Members);
+  } catch (error) {
+    console.error(error);
+    
   }
-
-  renderMembers(members);
 }
-
+BtnSearchMember.addEventListener("click",searchMembers);
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("create-member-button")?.addEventListener("click", () => {
     openMemberForm();
   });
-
+  document.getElementById("searchInput")?.addEventListener("input", function() {
+    if (this.value.trim() === "") {
+      LoadMembers();   // uses current status filter
+    }
+  });
   window.addEventListener("message", (event) => {
     if (event.origin !== window.location.origin || event.data?.type !== "member-saved") return;
     LoadMembers();
   });
-
-  document.getElementById("searchInput")?.addEventListener("input", searchMembers);
   LoadMembers();
 });

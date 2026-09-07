@@ -28,6 +28,7 @@ signupForm.addEventListener("submit", async (event) => {
         alert("Account created. You can now sign in.");
         window.location.href = "Login.html";
     } catch (error) {
-        alert(error.message);
+        console.error(error.message);
+        alert("Failed To Sign Up Try Again.");
     }
 });

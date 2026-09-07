@@ -36,6 +36,53 @@ export async function getBorrowings() {
     return await handleResponse(response);
 }
 
+export async function getBorrowingsByMemberName(memberName) {
+    const response = await fetch(
+        `${API_URL}ListBorrowingsByMemberName/${memberName}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+export async function getBorrowingsByUserEmail(email) {
+    const response = await fetch(
+        `${API_URL}ListBorrowingsByEmailUser/${email}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
+
+export async function getBorrowingsByStatus(status) {
+    // status is a string: "Active", "Returned", "Overdue", or "" for all
+    const response = await fetch(
+        `${API_URL}GetAllBorrowingsReturnedByStatus/${status}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+    return await handleResponse(response);
+}
+
+export async function getBorrowingsByBookTitle(bookTitle) {
+    const response = await fetch(
+        `${API_URL}ListBorrowingsBookTitle/${bookTitle}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
+    return await handleResponse(response);
+}
 
 // GET BORROWING BY ID
 export async function getBorrowingById(id) {

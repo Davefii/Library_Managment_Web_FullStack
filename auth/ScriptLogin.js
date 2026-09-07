@@ -34,7 +34,8 @@ LoginBtn.addEventListener("click", async (event) =>
             return;
         }
     } catch (error) {
-        alert(error.message);
+        console.error(error.message);
+        alert("Failed To Login Try Again.");
     }
 }
 );
