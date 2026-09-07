@@ -6,7 +6,7 @@ import {
   showTableMessage,
 } from "../SharedModules/TableRenderer.js";
 
-
+const searchInput = document.getElementById("searchInput");
 const BtnSearchMember = document.getElementById("Search-member-button");
 const MEMBER_COLUMNS = [
   { value: (member) => member.name },
@@ -117,7 +117,7 @@ function renderMembers(members) {
 }
 
 async function searchMembers() {
-  const searchInput = document.getElementById("searchInput");
+  
   const tableBody = document.getElementById("membersTableBody");
   const searchValue = searchInput.value.trim().toLowerCase();
   const Bywhat = document.getElementById("Bywhat").value;
@@ -148,17 +148,23 @@ async function searchMembers() {
     renderMembers(Members);
   } catch (error) {
     console.error(error);
-    
+    throw error;
   }
 }
 BtnSearchMember.addEventListener("click",searchMembers);
+searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault(); 
+                searchMembers();
+            }
+        });
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("create-member-button")?.addEventListener("click", () => {
     openMemberForm();
   });
   document.getElementById("searchInput")?.addEventListener("input", function() {
     if (this.value.trim() === "") {
-      LoadMembers();   // uses current status filter
+      LoadMembers();   
     }
   });
   window.addEventListener("message", (event) => {

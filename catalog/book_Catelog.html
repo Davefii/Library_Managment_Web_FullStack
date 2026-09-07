@@ -20,7 +20,7 @@
       </section>
       <section class="container catalog-layout">
         <aside class="filter-panel card" aria-label="Catalog filters">
-          <div class="filter-panel__header">
+          <!--<div class="filter-panel__header">
             <h2>Filters</h2>
             <button class="text-button" type="button">Reset</button>
           </div>
@@ -39,7 +39,7 @@
             ><label
               ><input type="radio" name="availability" /> Available now</label
             >
-          </fieldset>
+          </fieldset>-->
         </aside>
         <section class="catalog-results" aria-labelledby="catalog-heading">
           <header class="results-toolbar">
@@ -50,13 +50,9 @@
             <div class="toolbar-actions">
               <div class="search-field">
                 <span class="search-field__icon">⌕</span
-                ><input type="search" placeholder="Search books" />
+                ><input type="search" placeholder="Search books" id="SearchBookBox"/>
               </div>
-              <select aria-label="Sort books">
-                <option>Recently added</option>
-                <option>Title A–Z</option>
-                <option>Most borrowed</option>
-              </select>
+              <button class="button button--primary" id="SearchBookBtn">Search</button>
             </div>
           </header>
           <div id="catalog-grid" class="catalog-grid"></div>

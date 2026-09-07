@@ -32,6 +32,30 @@ export async function BooksListForAnyone() {
     return await handleResponse(response);
 }
 
+export async function GetListBooksByTitle(title) {
+    
+
+        const response  = await fetch(
+      `${API_URL}GetListBooksByTitle/${title}`,
+        {
+            method: "GET"
+        }
+    );
+    return await handleResponse(response);
+}
+
+export async function GetListBooksByISBN(isbn) {
+    
+
+        const response  = await fetch(
+      `${API_URL}GetListBooksByISBN/${isbn}`,
+        {
+            method: "GET"
+        }
+    );
+    return await handleResponse(response);
+}
+
 export async function TotalBooksByAuthor(authorId) {
 
     const response = await fetch(

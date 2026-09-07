@@ -5,7 +5,8 @@ import {
   showTableMessage,
 } from "../SharedModules/TableRenderer.js";
 
-let allBooks = [];
+const searchInput = document.getElementById("searchInput");
+
 
 function getAuthorNames(book) {
   const authors = book.authors ?? book.Authors ?? [];
@@ -116,14 +117,14 @@ export async function LoadBooks() {
   showTableMessage(tableBody, "Loading books...", BOOK_COLUMNS.length);
 
   try {
-    allBooks = await Books.BooksList();
+    const books = await Books.BooksList();
 
-    if (!Array.isArray(allBooks) || allBooks.length === 0) {
+    if (!Array.isArray(books) || books.length === 0) {
       showTableMessage(tableBody, "No books found.", BOOK_COLUMNS.length);
       return;
     }
 
-    renderBooks(allBooks);
+    renderBooks(books);
   } catch (error) {
     console.error("Failed to load books:", error);
     showTableMessage(tableBody, "Could not load books. Please refresh the page.", BOOK_COLUMNS.length);
@@ -139,36 +140,53 @@ function renderBooks(books) {
   });
 }
 
-function SearchBook() {
+async function SearchBook() {
   const tableBody = document.getElementById("booksTableBody");
-  const searchInput = document.getElementById("searchInput");
   const byWhat = document.getElementById("ByWhat");
   const searchValue = searchInput.value.trim().toLowerCase();
 
   if (!searchValue) {
-    renderBooks(allBooks);
+    await LoadBooks();
     return;
   }
+  let books = [];
 
-  const books = allBooks.filter((book) => {
-    const value = byWhat.value === "isbn"
-      ? book.isbn ?? book.ISBN ?? ""
-      : book.title ?? book.Title ?? "";
-      return String(value).toLowerCase().includes(searchValue);
-  });
-  
-  if (!books.length) {
-    showTableMessage(tableBody, "No books found.", BOOK_COLUMNS.length);
-    return;
+  try {
+    switch (byWhat.value) {
+      case "title":
+        books = await Books.GetListBooksByTitle(searchValue);
+        break;
+      case "isbn":
+        books = await Books.GetListBooksByISBN(searchValue);
+        break;
+      default:
+        books = await Books.BooksList();
+        break;
+    }
+    if (!books.length) {
+      showTableMessage(tableBody, "No books found.", BOOK_COLUMNS.length);
+      return;
+    }
+    renderBooks(books);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
-
-  renderBooks(books);
 }
-
+const searchBook = document.getElementById("searchBook");
+searchBook.addEventListener("click", SearchBook);
+searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault(); 
+                SearchBook();
+            }
+        });
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("searchBook")?.addEventListener("click", SearchBook);
-  document.getElementById("searchInput")?.addEventListener("input", SearchBook);
-  document.getElementById("ByWhat")?.addEventListener("change", SearchBook);
+  searchInput.addEventListener("input", function() {
+    if (this.value.trim() === "") {
+      LoadBooks();   
+    }
+  });
   document.getElementById("createBook")?.addEventListener("click", OpenAddBook);
   LoadBooks();
 });

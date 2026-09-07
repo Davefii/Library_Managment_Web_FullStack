@@ -102,11 +102,11 @@ export async function getBorrowingById(id) {
 // ADD BORROWING
 export async function addBorrowing(borrowing) {
 
-    const payload = {
+    /*const payload = {
         memberId: Number(borrowing.MemberId ?? borrowing.memberId),
         bookId: Number(borrowing.BookId ?? borrowing.bookId),
         borrowDate: borrowing.BorrowDate ?? borrowing.borrowDate ?? new Date().toISOString()
-    };
+    };*/
 
     const response = await fetch(
         `${API_URL}AddBorrowing`,
@@ -117,7 +117,7 @@ export async function addBorrowing(borrowing) {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(borrowing)
         }
     );
 

@@ -1,10 +1,13 @@
 import { GetBookByID, ListBooksByCategorieForAnyone } from "../API_service_layer/Books.js";
 import { GetCurrentUser } from "../API_service_layer/Users.js";
+import { addBorrowing } from "../API_service_layer/Borrowings.js";
+import { getMe } from "../API_service_layer/Members.js";
 import { renderBooks } from "./book-renderer.js";
 
 const API_ORIGIN = "https://localhost:7010/";
 const bookId = new URLSearchParams(window.location.search).get("id");
 const relatedBooks = document.getElementById("related-books");
+const btnBorrowbook = document.getElementById("btnBorrowbook");
 
 function getAuthorNames(book) {
     return book.authors?.map((author) => `${author.firstName} ${author.lastName}`).join(", ") || "Unknown author";
@@ -80,6 +83,22 @@ async function loadDetails() {
     }
 }
 
+btnBorrowbook.addEventListener("click", async () => {
+    const now = new Date();
+    try {
+        btnBorrowbook.textContent = "Processing....";
+        const Infome = await getMe();
+        const Borrowbook = {memberId : Infome.id, bookId : bookId,borrowDate : new Date().toISOString()  };
+        addBorrowing(Borrowbook).catch((error) => {alert(error);btnBorrowbook.textContent = "Failed";});
+        btnBorrowbook.textContent = "Done";
+    } catch (error) {
+        console.error(error);
+        alert("Failed to Borrow this Book Login or Sign up then Borrow This Book Again.");
+        btnBorrowbook.textContent = "Failed";
+        throw error;
+    }
+    
+});
 loadDetails().catch((error) => {
     document.querySelector("[data-book-title]").textContent = "Unable to load book";
     relatedBooks.innerHTML = '<p class="book-detail__description">Book details are unavailable.</p>';

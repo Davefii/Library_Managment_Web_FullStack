@@ -9,6 +9,7 @@ import {
 
 const Searchbtn = document.getElementById("Searchbtn");
 const statusFilter = document.getElementById("statusFilter");
+const searchInput = document.getElementById("searchInput");
 function createButton(action, label, className, borrowingId) {
   const button = document.createElement("button");
   button.type = "button";
@@ -236,6 +237,12 @@ if (statusFilter) {
     });
 }
 Searchbtn.addEventListener("click", searchBorrowings);
+searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault(); // prevent form submission if any
+                searchBorrowings();
+            }
+        });
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("createBorrowingButton")?.addEventListener("click", OpenAddBorrow);
   loadBorrowings();
