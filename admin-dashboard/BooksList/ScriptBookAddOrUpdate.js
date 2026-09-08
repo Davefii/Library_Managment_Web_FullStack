@@ -187,10 +187,8 @@ async function LoadDataUpdateMode()
     ElementUI.description.value =
         book.description ?? "";
 
-    //ElementUI.DisplayImage.setAttribute("src",book.CoverImage);
-    const coverImage = book.CoverImage ?? "";
-    ElementUI.DisplayImage.src = `https://localhost:7010/${book.coverImage}`;
     
+    ElementUI.DisplayImage.src = `https://localhost:7010/${book.coverImage}`;
     const authorId = book.authors?.[0]?.id;
     const categoryId = book.categories?.[0]?.id;
     setSelectedOption(ElementUI.listAuthors, authorId);

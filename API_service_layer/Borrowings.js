@@ -215,7 +215,7 @@ export async function getRecentBorrowingsForMember() {
 export async function getRecentBorrowingsForMemberById(memberId) {
 
     const response = await fetch(
-        `${API_URL}RecentBorrowingsForMember/${encodeURIComponent(memberId)}`,
+        `${API_URL}RecentBorrowingsForMember/${memberId}`,
         {
             method: "GET",
             credentials: "include"
