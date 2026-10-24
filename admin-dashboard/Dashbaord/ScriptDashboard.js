@@ -1,4 +1,5 @@
 import * as Dashboard from "../../API_service_layer/Dashboard.js";
+import { formatDate } from "../SharedModules/TableRenderer.js";
 const LibrarystatisticsUI = 
 {
     totalBooks : document.getElementById("totalBooks"),
@@ -104,13 +105,12 @@ function LoadRecentBorrowings() {
                 borrowing.status;
 
 
-            const borrowingDate =
-                new Date(borrowing.datee);
-
             dateCell.textContent =
-                Number.isNaN(borrowingDate.getTime())
-                    ? borrowing.datee
-                    : borrowingDate.toLocaleDateString();
+                formatDate(
+                    borrowing.borrowDate ??
+                    borrowing.BorrowDate ??
+                    borrowing.datee
+                );
 
 
             statusCell.appendChild(statusBadge);
@@ -145,4 +145,3 @@ function LoadData()
     }
 }
 document.addEventListener("DOMContentLoaded", LoadData());
-
