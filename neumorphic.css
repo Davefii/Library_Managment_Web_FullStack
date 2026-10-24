@@ -1,0 +1,147 @@
+:root {
+    --color-canvas: #e9e9e7 !important;
+    --color-surface: #e9e9e7 !important;
+    --color-surface-soft: #e2e3e1 !important;
+    --color-surface-muted: #d9dad8 !important;
+    --color-text: #303235 !important;
+    --color-text-muted: #686b6d !important;
+    --color-primary: #3f6755 !important;
+    --color-primary-dark: #315342 !important;
+    --color-primary-soft: #d4dfd8 !important;
+    --color-border: transparent !important;
+    --bg: #e9e9e7 !important;
+    --surface: #e9e9e7 !important;
+    --surface-soft: #e2e3e1 !important;
+    --surface-muted: #d9dad8 !important;
+    --text: #303235 !important;
+    --muted: #686b6d !important;
+    --primary: #3f6755 !important;
+    --primary-dark: #315342 !important;
+    --border: transparent !important;
+    --shadow-soft: 10px 10px 20px rgba(163, 166, 164, .62), -10px -10px 20px rgba(255, 255, 255, .86) !important;
+    --shadow-card: 8px 8px 16px rgba(163, 166, 164, .62), -8px -8px 16px rgba(255, 255, 255, .86) !important;
+    --radius-sm: 12px !important;
+    --radius-md: 16px !important;
+    --radius-lg: 22px !important;
+}
+
+html body {
+    background: #e9e9e7 !important;
+    color: #303235 !important;
+}
+
+html body .site-header,
+html body .member-header {
+    background: rgba(233, 233, 231, .94) !important;
+    border: 0 !important;
+    box-shadow: 0 5px 12px rgba(163, 166, 164, .34), 0 -3px 10px rgba(255, 255, 255, .72) !important;
+}
+
+html body .site-footer {
+    background: #e2e3e1 !important;
+    border: 0 !important;
+    box-shadow: 0 -5px 12px rgba(163, 166, 164, .2) !important;
+}
+
+html body .card,
+html body .book-preview,
+html body .collection-card,
+html body .hero-card,
+html body .filter-panel,
+html body .welcome-card,
+html body .stat-card,
+html body .table-card,
+html body .profile-card,
+html body .profile-form,
+html body .auth-card,
+html body .form-card,
+html body .toolbar,
+html body .author-card,
+html body .book-detail,
+html body .book-facts div,
+html body .user-dropdown,
+html body .category-tile:not(.category-tile--feature) {
+    background-color: #e9e9e7 !important;
+    border-color: transparent !important;
+    box-shadow: 8px 8px 16px rgba(163, 166, 164, .62), -8px -8px 16px rgba(255, 255, 255, .86) !important;
+}
+
+html body .button,
+html body button.button,
+html body .header-icon,
+html body .user-button {
+    border: 0 !important;
+    border-radius: 12px !important;
+    box-shadow: 5px 5px 10px rgba(163, 166, 164, .58), -5px -5px 10px rgba(255, 255, 255, .84) !important;
+    transition: box-shadow .2s ease, transform .2s ease, background-color .2s ease !important;
+}
+
+html body .button--primary,
+html body button.button--primary {
+    background: #3f6755 !important;
+    color: #fff !important;
+}
+
+html body .button--secondary,
+html body button.button--secondary,
+html body .button:not(.button--primary):not(.button--danger) {
+    background: #e9e9e7 !important;
+    color: #303235 !important;
+}
+
+html body .button--danger,
+html body button.button--danger {
+    background: #eadfdd !important;
+    color: #8e4c44 !important;
+}
+
+html body .button:hover,
+html body button.button:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 7px 7px 13px rgba(163, 166, 164, .58), -7px -7px 13px rgba(255, 255, 255, .84) !important;
+}
+
+html body .button:active,
+html body button.button:active {
+    transform: translateY(0) !important;
+    box-shadow: inset 4px 4px 8px rgba(163, 166, 164, .58), inset -4px -4px 8px rgba(255, 255, 255, .84) !important;
+}
+
+html body input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+html body select,
+html body textarea,
+html body .input,
+html body .select,
+html body .textarea {
+    background-color: #e9e9e7 !important;
+    color: #303235 !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    box-shadow: inset 4px 4px 8px rgba(163, 166, 164, .56), inset -4px -4px 8px rgba(255, 255, 255, .84) !important;
+}
+
+html body input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+html body select:focus,
+html body textarea:focus,
+html body .input:focus,
+html body .select:focus,
+html body .textarea:focus {
+    outline: 2px solid #6c8d7a !important;
+    outline-offset: 2px;
+}
+
+html body .data-table th,
+html body th {
+    background: #e2e3e1 !important;
+    color: #686b6d !important;
+}
+
+html body .data-table tbody tr:hover,
+html body tbody tr:hover {
+    background: rgba(255, 255, 255, .35) !important;
+}
+
+html body :focus-visible {
+    outline: 2px solid #6c8d7a;
+    outline-offset: 3px;
+}

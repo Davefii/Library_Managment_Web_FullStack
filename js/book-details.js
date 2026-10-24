@@ -26,7 +26,7 @@ function setCover(book) {
     cover.replaceWith(image);
     image.className = "book-detail__cover-image";
     image.style.width = "100%";
-    image.style.height = "100%";
+    image.style.height = "fit-content";
     image.style.objectFit = "cover";
     image.style.borderRadius = "inherit";
 }
